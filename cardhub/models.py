@@ -39,13 +39,6 @@ class CardHolderCard(models.Model):
     card = models.ForeignKey(CreditCardProduct, on_delete=models.CASCADE)
 
 
-class CardWebPage(models.Model):
-    pageID = models.AutoField(primary_key=True)
-    page_url = models.CharField(max_length=100)
-    page_content = models.TextField()
-    associated_cards = models.ForeignKey(CreditCardProduct, on_delete=models.CASCADE)
-
-
 class AccountStatement(models.Model):
     statement_id = models.AutoField(primary_key=True)
     date = models.DateField(null=True)
