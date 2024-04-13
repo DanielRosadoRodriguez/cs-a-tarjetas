@@ -16,11 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from cardhub import views
+from cardhub import views_file as views
+from cardhub.views.SignUp import SignUp
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('signup/', views.signup, name='sign_up_form'),
+    path('signup/', SignUp.as_view(), name='signup'),
     path('login/', views.login, name='log_in_form'),
     path('add_card_to_user_cardholder/', views.add_card_to_user_cardholder, name='add_card_to_user_cardholder'),
     path('get_all_cards/', views.get_all_cards, name='get_all_cards'),
