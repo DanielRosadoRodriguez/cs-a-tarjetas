@@ -1,0 +1,15 @@
+*.env
+*.env
+.venv
+migrations
+cardhub/domain/__pycache__
+cardhub/__pycache__
+*__pycache__
+*/__pycache__
+djangocrud/__pycache__
+__pycache__
+**/__pycache__/
+*Lib
+*Lib/*
+Scripts
+Scripts/*
