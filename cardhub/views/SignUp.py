@@ -13,7 +13,7 @@ class SignUp(View):
 
     def _build_signup_view(self, request):
         sign_up_form = CreateNewPerson()
-        sign_up_view = render(request, 'add.html', {'form': sign_up_form})
+        sign_up_view = render(request, 'sign_up.html', {'form': sign_up_form})
         return sign_up_view
 
 

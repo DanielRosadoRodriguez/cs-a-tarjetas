@@ -9,7 +9,7 @@ class TestSignUpView(TestCase):
     def test_get(self):
         response = self.client.get(reverse('signup'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'add.html')
+        self.assertTemplateUsed(response, 'sign_up.html')
 
     def test_post(self):
         User.objects.create(
