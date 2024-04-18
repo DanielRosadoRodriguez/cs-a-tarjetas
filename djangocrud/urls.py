@@ -17,20 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from cardhub import views_file as views
-from cardhub.views.SignUp import SignUp
+from cardhub.views.signup import Signup
+from cardhub.views.login import Login
+from cardhub.views.home import Home
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('signup/', SignUp.as_view(), name='signup'),
-    path('login/', views.login, name='log_in_form'),
-    path('add_card_to_user_cardholder/', views.add_card_to_user_cardholder, name='add_card_to_user_cardholder'),
-    path('get_all_cards/', views.get_all_cards, name='get_all_cards'),
-    path('remove_card_from_user_cardholder/', views.remove_card_from_cardholder, name='remove_card_from_user_cardholder'),
-    path('generate_card_statement/', views.generate_card_statement, name='generate_card_statement'),
-    path('get_all_cards/', views.get_all_cards, name='get_all_cards'),
-    path('get_all_user_cards/', views.get_all_user_cards, name='get_all_user_cards'),
-    path('get_last_statement/', views.get_last_statement, name='get_last_statement'),
-    path('get_all_statements_from_card/', views.get_all_statement_from_card, name='get_all_statement'),
-    path('modify_statement/', views.modify_statement, name='modify_statement')
+    path('', Home.as_view(), name='home'),
+    path('signup/', Signup.as_view(), name='signup'),
+    path('login/', Login.as_view(), name='login'),
 ]

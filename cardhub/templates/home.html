@@ -1,0 +1,35 @@
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+          <br>
+          <br>
+          <br>
+        <h1 class="text-center">Bienvenidos a CardHub!</h1>
+          <br>
+          <br>
+        <h2 class="text-center">Qué desea hacer?</h2>
+        <form method="post" action="{% url 'home' %}" class="my-4">
+          {% csrf_token %}
+          <center>
+            <br>
+            <br>
+            <br>
+          <input name="action" type="submit" class="btn btn-primary btn-lg" value="Log-In">
+            <br>
+            <br>
+            <br>
+          <input name="action" type="submit" class="btn btn-primary btn-lg" value="Sign-Up">
+            <br>
+            <br>
+            <br>
+          </center>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
