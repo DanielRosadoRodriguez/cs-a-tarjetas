@@ -3,6 +3,8 @@ from django.shortcuts import redirect, render
 from django.views import View
 from cardhub.forms import UserForm
 from cardhub.models import Cardholder, User
+from django.contrib import messages
+from django.db.utils import IntegrityError
 
 class Signup(View):
     
@@ -25,17 +27,25 @@ class Signup(View):
         new_user_data = form.cleaned_data
         try:
             self._save_user(new_user_data)
+            self._send_success_message(request)
             return self._go_to_login_page()
-        except Exception as e:
-            import traceback
-            traceback.print_exc() 
-        print(f"An error occurred")
-        return self._go_back_to_signup_page(request)
+        except IntegrityError as e:
+            self._send_error_message(request, e)
+            return self._go_back_to_signup_page(request)
 
     def _go_to_login_page(self):
         login_url = reverse('login')
         return redirect(login_url)
 
+    def _send_success_message(self, request):
+        success_message:str =  'User created successfully'
+        messages.success(request, success_message)
+    
+    def _send_error_message(self, request, error):
+        error_message = "This email is already in use. Please try again with a different email."
+        messages.error(request, error_message)
+                
+        
     def _go_back_to_signup_page(self, request):
         sign_up_page = render(request, 'signup.html', {'form': UserForm()})
         return sign_up_page

@@ -2,6 +2,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
+from cardhub.domain.authenticator import Authenticator
+from cardhub.exceptions.EmailNotRegisteredException import EmailNotRegisteredException
+from cardhub.exceptions.IncorrectPasswordException import IncorrectPasswordException
 from cardhub.forms import LogInForm
 from cardhub.models import User
 from django.contrib import messages
@@ -26,21 +29,20 @@ class Login(View):
         if not form.is_valid(): return self._go_back_to_log_in_page(request)
         user_data = form.cleaned_data
         try:
-            user = self._authenticate_user(user_data) 
-            successful_log_in_message = f"Person: { user.get_name() } has been logged in"
-            successful_log_in_notification = HttpResponse(successful_log_in_message)
-            return successful_log_in_notification
-        except Exception as e:
-            import traceback
-            traceback.print_exc() 
-            print(f"An error occurred: {str(e)}")
+            authenticated_user = Authenticator(users=list(User.objects.all()), email=user_data['email'], password=user_data['password']).authenticate_user()
+            successful_log_in_message = f"Person: { authenticated_user.get_name() } has been logged in"
+            messages.success(request, successful_log_in_message)
+            return self._go_to_cardholder_page(request)
+        except EmailNotRegisteredException as email_exception:
+            messages.error(request, str(email_exception))
+        except IncorrectPasswordException as password_exception:
+            messages.error(request, str(password_exception))
         return self._go_back_to_log_in_page(request)
-
-    def _authenticate_user(self, user_data):
-        auth_user = User.objects.get(_email=user_data['email'], _password=user_data['password'])
-        return auth_user
     
 
     def _go_back_to_log_in_page(self, request):
         log_in_page = render(request, 'login.html', {'form': LogInForm()})
         return log_in_page
+
+    def _go_to_cardholder_page(self, request):
+        return render(request, 'cardholder.html')

@@ -4,7 +4,6 @@ from cardhub.exceptions.CardNotFoundError import CardNotFoundError
 from cardhub.exceptions.WrongDateFormatException import WrongDateFormatException
 
 
-
 class BankCard(models.Model):
     _id = models.AutoField(primary_key=True)
     _bank = models.CharField(max_length=100, null=False)

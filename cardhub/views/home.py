@@ -16,11 +16,13 @@ class Home(View):
 
     def post(self, request):
         action = request.POST.get('action')
+        # pasar a polimorfismo
         if action == 'Log-In':
             return self._go_to_login_page()
         elif action == 'Sign-Up':
             return self._go_to_signup_page()
         else:
+            ## poner código de error en clases
             return HttpResponse('Unknown action')
     
     def _go_to_login_page(self):

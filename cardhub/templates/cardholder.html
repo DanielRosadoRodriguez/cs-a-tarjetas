@@ -1,0 +1,21 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% for  msg in messages %}
+        {% if 'error' in msg.tags %}
+        <div class="alert alert-danger" role="alert">
+            {{ msg }}
+        </div>
+        {% endif %}
+        {% if 'success' in msg.tags %}
+        <div class="alert alert-success" role="alert">
+            {{ msg }}
+        </div>
+        {% endif %}
+    {% endfor %}
+
+
+
+{% endblock %}
