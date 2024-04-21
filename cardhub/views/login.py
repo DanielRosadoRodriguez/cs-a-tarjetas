@@ -1,6 +1,7 @@
 
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.views import View
 from cardhub.domain.authenticator import Authenticator
 from cardhub.exceptions.EmailNotRegisteredException import EmailNotRegisteredException
@@ -40,9 +41,9 @@ class Login(View):
         return self._go_back_to_log_in_page(request)
     
 
-    def _go_back_to_log_in_page(self, request):
-        log_in_page = render(request, 'login.html', {'form': LogInForm()})
-        return log_in_page
+    def _go_back_to_log_in_page(self):
+        login_url = reverse('login')
+        return redirect(login_url)
 
     def _go_to_cardholder_page(self, request):
         cardholder_page = render(request, 'cardholder.html')

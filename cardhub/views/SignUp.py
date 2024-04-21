@@ -1,4 +1,4 @@
-from django.shortcuts import reverse
+from django.urls import reverse
 from django.shortcuts import redirect, render
 from django.views import View
 from cardhub.forms import UserForm
@@ -46,9 +46,11 @@ class Signup(View):
         messages.error(request, error_message)
                 
         
-    def _go_back_to_signup_page(self, request):
-        sign_up_page = render(request, 'signup.html', {'form': UserForm()})
-        return sign_up_page
+    def _go_back_to_signup_page(self):
+        signup_url = reverse('signup')
+        return redirect(signup_url)
+
+
         
     def _save_user(self, data):
         print(f"Data: {data}")

@@ -20,6 +20,7 @@ from cardhub import views_file as views
 from cardhub.views.signup import Signup
 from cardhub.views.login import Login
 from cardhub.views.home import Home
+from cardhub.views.cardholder import CardHolderView
 
 
 urlpatterns = [
@@ -27,4 +28,5 @@ urlpatterns = [
     path('', Home.as_view(), name='home'),
     path('signup/', Signup.as_view(), name='signup'),
     path('login/', Login.as_view(), name='login'),
+    #path('cardholder/', CardHolderView.CardHolderView.as_view(), name='cardholder'),
 ]
