@@ -7,18 +7,7 @@
       <div class="col-md-6">
         <h1 class="text-center">Log-In</h1>
 
-        {% for msg in messages %}
-          {% if 'error' in msg.tags %}
-            <div class="alert alert-danger" role="alert">
-              {{ msg }}
-            </div>
-          {% endif %}
-          {% if 'success' in msg.tags %}
-            <div class="alert alert-success" role="alert">
-              {{ msg }}
-            </div>
-          {% endif %}
-        {% endfor %}
+        {% include "message.html" %}
 
         <form method="post" action="{% url 'login' %}" class="my-4">
           {% csrf_token %}

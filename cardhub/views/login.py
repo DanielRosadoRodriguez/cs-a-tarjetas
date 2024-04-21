@@ -45,4 +45,5 @@ class Login(View):
         return log_in_page
 
     def _go_to_cardholder_page(self, request):
-        return render(request, 'cardholder.html')
+        cardholder_page = render(request, 'cardholder.html')
+        return cardholder_page
