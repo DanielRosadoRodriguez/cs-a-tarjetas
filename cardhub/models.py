@@ -1,7 +1,10 @@
+import json
 import re
 from django.db import models
 from cardhub.exceptions.CardNotFoundError import CardNotFoundError
 from cardhub.exceptions.WrongDateFormatException import WrongDateFormatException
+from django.core.serializers.json import DjangoJSONEncoder
+
 
 
 class BankCard(models.Model):
@@ -24,17 +27,30 @@ class BankCard(models.Model):
 
 
 class UserCard(models.Model):
+    _id = models.AutoField(primary_key=True)
     _bank_card = models.ForeignKey(BankCard, on_delete=models.CASCADE)
     _owner = models.ForeignKey('User', on_delete=models.CASCADE)
-    _payment_date = models.DateField(null=False) #Tthe format is YYYY-MM-DD
+    _payment_date = models.DateField(null=False) #The format is YYYY-MM-DD
     _cut_off_date = models.DateField(null=False)
     _balance = models.FloatField(null=False)
+
+    def get_id(self) -> int:
+        return self._id
     
     def get_owner_name(self) -> str:
         return self._owner.get_name()
+    
+    def get_owner(self) -> 'User':
+        return self._owner
 
     def get_bank_card(self) -> BankCard:
         return self._bank_card
+    
+    def get_name(self) -> str:
+        return self._bank_card.get_name()
+    
+    def get_bank(self) -> str:
+        return self._bank_card.get_bank()
     
     def get_payment_date(self) -> str:
         return self._payment_date
@@ -122,6 +138,17 @@ class UserCard(models.Model):
             return True
         else:
             raise ValueError("Payment must be a float")
+
+    def to_dict(self):
+        return {
+            "id": self.get_id(),
+            "bank_card": self.get_bank_card().get_name(),  # Modify this according to your BankCard class
+            "bank": self.get_bank(),
+            "owner_name": self.get_owner_name(),
+            "payment_date": str(self.get_payment_date()),  # Converting date to string
+            "cut_off_date": str(self.get_cut_off_date()),
+            "balance": self.get_balance(),
+        }
 
 
 class Cardholder(models.Model):

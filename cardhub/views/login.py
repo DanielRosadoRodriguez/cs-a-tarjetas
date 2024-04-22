@@ -1,5 +1,4 @@
 
-from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import View
@@ -27,24 +26,26 @@ class Login(View):
 
     def _log_in_user(self, request):
         form = LogInForm(request.POST)
-        if not form.is_valid(): return self._go_back_to_log_in_page(request)
+        if not form.is_valid(): return self._go_back_to_log_in_page()
         user_data = form.cleaned_data
         try:
+            # login the user
             authenticated_user = Authenticator(users=list(User.objects.all()), email=user_data['email'], password=user_data['password']).authenticate_user()
             successful_log_in_message = f"Person: { authenticated_user.get_name() } has been logged in"
+            request.session['usr_email'] = authenticated_user.get_email()
             messages.success(request, successful_log_in_message)
-            return self._go_to_cardholder_page(request)
+            return self._go_to_home_page()
         except EmailNotRegisteredException as email_exception:
             messages.error(request, str(email_exception))
         except IncorrectPasswordException as password_exception:
             messages.error(request, str(password_exception))
-        return self._go_back_to_log_in_page(request)
+        return self._go_back_to_log_in_page()
     
 
     def _go_back_to_log_in_page(self):
         login_url = reverse('login')
         return redirect(login_url)
 
-    def _go_to_cardholder_page(self, request):
-        cardholder_page = render(request, 'cardholder.html')
-        return cardholder_page
+    def _go_to_home_page(self):
+        cardholder_page = reverse('home')
+        return redirect(cardholder_page)

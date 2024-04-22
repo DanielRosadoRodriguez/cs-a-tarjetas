@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Are you sure you want to add this card to your cardholder?</h1>
+
+  <table class="table">
+    <thead>
+      <th scope="col">Card Name:</th>
+      <th scope="col">Bank:</th>
+      <th scope="col">Interest:</th>
+    </thead>
+    <tbody>
+      <td>{{ card.get_name }}</td>
+      <td>{{ card.get_bank }}</td>
+      <td>{{ card.get_interest_rate }}</td>
+    </tbody>
+  </table>
+
+  <form action="{% url 'add_card' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="card_id" value="{{ card.get_id }}" />
+    <button type="submit" class="btn btn-success">Add</button>
+  </form>
+
+  <form action="{% url 'add_card' %}" method="get">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-secondary">No, go back</button>
+  </form>
+
+
+
+{% endblock %}

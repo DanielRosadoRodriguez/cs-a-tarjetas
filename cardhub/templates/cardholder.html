@@ -1,10 +1,12 @@
-
-{% extends 'base.html' %}
-
-{% block content %}
-
-    {% include "message.html" %}
-    <h1>Cardholder</h1>
-
-
-{% endblock %}
+<center>
+  <h2 class="d-flex center">Cardholder</h2>
+  <div class="row">
+    <div class="col-sm-6 mb-3 mb-sm-0">
+      {% for card in cards %}
+        <div class="col-sm-6">
+          {% include 'card.html' %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</center>

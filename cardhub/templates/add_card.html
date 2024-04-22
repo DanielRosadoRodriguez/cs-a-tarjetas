@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<center>
+  <h1>Selecciona una tarjeta para agergarla</h1>
+
+
+  <form action="{% url 'home' %}" method="post">
+    {% csrf_token %}
+    <button class="btn btn-secondary" type="submit" name="cancel">Return Home</button>
+  </form>
+
+ <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Card Name</th>
+          <th>Bank</th>
+          <th>Add</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for card in available_cards %}
+          <tr>
+            <td>{{ card.get_name }}</td>
+            <td>{{ card.get_bank }}</td>
+            <td>
+
+
+              <form action="{% url 'confirm_card_addition' %}" method="post">
+                {% csrf_token %} 
+                <input type="hidden" name="card_id" value="{{ card.get_id }}" /> 
+                <button type="submit" class="btn btn-primary">Add Card</button> 
+              </form>
+
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</center>
+{% endblock content %}

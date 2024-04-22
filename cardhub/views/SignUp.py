@@ -30,7 +30,7 @@ class Signup(View):
             self._send_success_message(request)
             return self._go_to_login_page()
         except IntegrityError as e:
-            self._send_error_message(request, e)
+            self._send_error_message(request)
             return self._go_back_to_signup_page(request)
 
     def _go_to_login_page(self):
@@ -41,7 +41,7 @@ class Signup(View):
         success_message:str =  'User created successfully'
         messages.success(request, success_message)
     
-    def _send_error_message(self, request, error):
+    def _send_error_message(self, request):
         error_message = "This email is already in use. Please try again with a different email."
         messages.error(request, error_message)
                 
@@ -49,11 +49,8 @@ class Signup(View):
     def _go_back_to_signup_page(self):
         signup_url = reverse('signup')
         return redirect(signup_url)
-
-
         
     def _save_user(self, data):
-        print(f"Data: {data}")
         cardholder = Cardholder.objects.create()
         user = User.objects.create(
             _name=data['name'],

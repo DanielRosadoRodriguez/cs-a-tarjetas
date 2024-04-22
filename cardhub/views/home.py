@@ -1,34 +1,32 @@
 
-from django.urls import reverse
-from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.views import View
+from cardhub.models import User
 
-class Home(View):
-    
+
+class HomeView(View):
+
     def get(self, request):
-        home_view = self._build_home_view(request)
-        return home_view
-
-    def _build_home_view(self, request):
-        home_view = render(request, 'home.html')
-        return home_view
-
-    def post(self, request):
-        action = request.POST.get('action')
-        # pasar a polimorfismo
-        if action == 'Log-In':
-            return self._go_to_login_page()
-        elif action == 'Sign-Up':
-            return self._go_to_signup_page()
-        else:
-            ## poner código de error en clases
-            return HttpResponse('Unknown action')
+        cardholder_view = self._build_home_view(request)
+        return cardholder_view
     
-    def _go_to_login_page(self):
-        login_url = reverse('login')
-        return redirect(login_url)
+    def post(self, request):
+        cardholder_view = self._build_home_view(request)
+        return cardholder_view
+    
+    def _build_home_view(self, request):
+        username = self._query_user_name(request)
+        cardholder = self._query_user(request).get_cardholder()
+        cards = cardholder.get_all_cards()
+        cardholder_view = render(request, 'home.html', {'username': username, 'cards': cards})
+        return cardholder_view
 
-    def _go_to_signup_page(self):
-        signup_url = reverse('signup')
-        return redirect(signup_url)
+    def _query_user_name(self, request):
+        user = self._query_user(request)
+        username = user.get_name()
+        return username
+
+    def _query_user(self, request):
+        email = request.session['usr_email']
+        user = User.objects.get(_email=email)
+        return user
