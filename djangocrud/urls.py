@@ -16,13 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from cardhub import views_file as views
 from cardhub.views.add_card import AddCardView
 from cardhub.views.card import Card
 from cardhub.views.confirm_card_addition import ConfirmCardAddition
 from cardhub.views.confirm_card_deletion import ConfirmCardDeletion
 from cardhub.views.delete_card import DeleteCard
-from cardhub.views.signup import Signup
+from cardhub.views.SignUp import Signup
 from cardhub.views.login import Login
 from cardhub.views.welcome import Welcome
 from cardhub.views.home import HomeView
