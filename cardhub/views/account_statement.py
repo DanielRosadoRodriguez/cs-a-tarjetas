@@ -7,9 +7,7 @@ from datetime import datetime
 class AccountStatementView(View):
 
     def get(self, request, card_id):
-        # Obtener la instancia de UserCard
         user_card = get_object_or_404(UserCard, _id=card_id)
-        # Intentar obtener o crear un AccountStatement para la tarjeta
         statement, created = AccountStatement.objects.get_or_create(card=user_card)
         context = {
             'statement': statement,
@@ -32,15 +30,14 @@ class AccountStatementView(View):
                 statement.add_charge(amount)
             if payment:
                 payment_amount = float(payment)
-                # Validación del pago utilizando el modelo UserCard
                 if not user_card._is_correct_payment(payment_amount):
                     raise ValueError("Invalid payment.")
-                user_card.pay(payment_amount)  # Actualizar el balance de UserCard
-                statement.add_payment(payment_amount)  # Agregar pago al estado de cuenta
+                user_card.pay(payment_amount)
+                statement.add_payment(payment_amount)
         except Exception as e:
             errors.append(str(e))
 
         if errors:
             return redirect(f"{request.path}?errors={' '.join(errors)}")
-        return redirect('account_statement', card_id=card_id)  # Asegúrate de tener esta URL configurada
+        return redirect('account_statement', card_id=card_id)  # Anadir URL
 
