@@ -1,13 +1,8 @@
-
-
 from datetime import date, timedelta
-import datetime
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import View
-
 from cardhub.models import BankCard, User, UserCard
-
 
 class AddCardView(View):
     
