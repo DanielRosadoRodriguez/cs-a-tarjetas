@@ -25,7 +25,7 @@ from cardhub.views.SignUp import Signup
 from cardhub.views.login import Login
 from cardhub.views.welcome import Welcome
 from cardhub.views.home import HomeView
-
+from cardhub.views.account_statement import AccountStatementView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -38,4 +38,5 @@ urlpatterns = [
     path('delete_card/', DeleteCard.as_view(), name='delete_card'),
     path('confirm_card_deletion/', ConfirmCardDeletion.as_view(), name='confirm_card_deletion'),
     path('confirm_card_addition/', ConfirmCardAddition.as_view(), name='confirm_card_addition'),
+    path('account_statement/<int:card_id>/', AccountStatementView.as_view(), name='account_statement'),  #Test y pruebas pendientes
 ]
