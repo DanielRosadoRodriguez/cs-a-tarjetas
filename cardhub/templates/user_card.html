@@ -15,7 +15,7 @@
         <input type="hidden" name="card_id" value="{{ user_card.id }}">
         <label for="new_payment_date">New Payment Date:</label>
         <input type="date" id="new_payment_date" name="new_payment_date" value="{{ user_card.get_payment_date }}" required>
-        <button type="submit" name="edit_payment_date">Edit Payment Date</button>
+        <button type="submit" class="btn btn-primary">Edit Payment Date</button>
     </form>
 
     <h3>Cut Off Information</h3>
@@ -25,7 +25,7 @@
         {% csrf_token %}
         <label for="new_cut_off_date">New Cut Off Date:</label>
         <input type="date" id="new_cut_off_date" name="new_cut_off_date" value="{{ user_card.get_cut_off_date }}" required>
-        <button type="submit" name="edit_cut_off_date">Edit Cut Off Date</button>
+        <button type="submit" class="btn btn-primary">Edit Cut Off Date</button>
     </form>
 
 </center>

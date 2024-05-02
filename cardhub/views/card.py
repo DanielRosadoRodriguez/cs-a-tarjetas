@@ -4,8 +4,8 @@ from django.http import JsonResponse
 from cardhub.models import UserCard
 from django.urls import reverse
 from django.shortcuts import redirect, render
-from cardhub.models import UserCard, WrongDateFormatException
-
+from cardhub.models import UserCard, WrongDateFormatException, BankCard
+from datetime import date, timedelta
 
 
 class Card(View):
@@ -21,10 +21,17 @@ class Card(View):
         else:
             return self._build_response(request)
 
+
     def _build_response(self, request):
-        user_card_view = render(request, 'user_card.html')
+        user_card = self._query_user_card(request)
+        user_card_view = render(request, 'user_card.html', {'user_card': user_card})
         return user_card_view
 
+    def _query_user_card(self, request):
+        card_id = request.POST.get('card_id')  
+        user_card = UserCard.objects.get(_id=card_id)
+        return user_card
+    
     def _go_to_home_page(self):
         home_url = reverse('home')
         return redirect(home_url)
@@ -49,8 +56,15 @@ class Card(View):
             return JsonResponse({'error': str(e)})
         return self._build_response(request)
     
-    def _query_user_card(self, request):
-        card_id = request.POST.get('card_id')  
-        user_card = UserCard.objects.get(_id=card_id)
-        return user_card
+    """def _query_user_card(self, request):
+        card_id = request.POST['card_id']  
+        bank_card = BankCard.objects.get(_id=card_id)
+        user_card = UserCard.objects.create(
+            _bank_card=bank_card,  
+            _owner = self._query_user(request),  
+            _payment_date=date.today(),  
+            _cut_off_date=date.today() + timedelta(days=1),  
+            _balance=0.0  
+            )
+        return user_card"""
     
