@@ -1,7 +1,7 @@
 
 from django.test import SimpleTestCase
 from django.urls import reverse, resolve
-from cardhub.views.signup import Signup
+from cardhub.views.SignUp import Signup
 
 
 class TestUrls(SimpleTestCase):
