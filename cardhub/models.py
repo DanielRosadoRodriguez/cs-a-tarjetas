@@ -14,16 +14,16 @@ class BankCard(models.Model):
     _name = models.CharField(max_length=100, null=False)
     _interest_rate = models.FloatField(null=False)
     
-    def get_id(self):
+    def get_id(self) -> int:
         return self._id
 
-    def get_bank(self):
+    def get_bank(self) -> str:
         return self._bank
 
-    def get_name(self):
+    def get_name(self) -> str:
         return self._name
 
-    def get_interest_rate(self):
+    def get_interest_rate(self) -> float:
         return self._interest_rate
 
 
@@ -32,7 +32,7 @@ class UserCard(models.Model):
     _bank_card = models.ForeignKey(BankCard, on_delete=models.CASCADE)
     _owner = models.ForeignKey('User', on_delete=models.CASCADE)
     _payment_date = models.DateField(null=False) #The format is YYYY-MM-DD
-    _cut_off_date = models.DateField(null=False)
+    _cut_off_date = models.DateField(null=False) #The format is YYYY-MM-DD
     _balance = models.FloatField(null=False)
 
     def get_id(self) -> int:
@@ -55,53 +55,90 @@ class UserCard(models.Model):
     
     def get_payment_date(self) -> str:
         return self._payment_date
-    
+
     def set_payment_date(self, payment_date: str):
+        # Verify parameter
+        if not payment_date: raise ValueError("Payment date can't be empty")
+
+        # Validate parameter type
         if not self._is_valid_payment_date(payment_date): raise ValueError("Incorrect payment date")
+
+        # Set the payment date
         self._payment_date = payment_date
 
+    def get_cut_off_date(self) -> str:
+        return self._cut_off_date   
+
+    def set_cut_off_date(self, cut_off_date: str):
+        # Validate parameter
+        if not cut_off_date: raise ValueError("Cut off date can't be empty")
+
+        # Verify parameter
+        if not self._is_valid_cut_off_date(cut_off_date): raise ValueError("Incorrect cut off date")
+        
+        # Set the cut off date
+        self._cut_off_date = cut_off_date
+
     def _is_valid_payment_date(self, payment_date: str) -> bool:
-        # NO MOVER EL ORDEN DE LAS SENTENCIAS PQ EXPLOTA
-        is_string = self._is_date_string(payment_date) 
+        # Verify parameter exists
+        if not payment_date: raise ValueError("Payment date can't be empty")
+
+        # Validate parameter type
+        if not isinstance(payment_date, str): raise ValueError("Payment date must be a string")
+
+        # Check if the payment date is valid
         is_correct_format = self._correct_date_format(payment_date)
         is_after_cut_off_date = self._is_payment_date_after_cut_off_date(payment_date)
-        is_valid = is_string and is_correct_format and is_after_cut_off_date
+        is_valid =  is_correct_format and is_after_cut_off_date
         return is_valid
 
     def _is_payment_date_after_cut_off_date(self, payment_date: str) -> bool:
-        if (payment_date > self._cut_off_date):
+        # Verify parameters
+        if not payment_date: raise ValueError("Payment date can't be empty")
+
+        # Validate parameters
+        if not isinstance(payment_date, str): raise ValueError("Payment date must be a string")
+
+        # Check if the payment date is after the cut off date
+        if (payment_date > self.get_cut_off_date()):
             return True
         else: 
             raise ValueError("The payment date must be after the cut off date")
-    
-    def get_cut_off_date(self) -> str:
-        return self._cut_off_date
-    
-    def set_cut_off_date(self, cut_off_date: str):
-        if not self._is_valid_cut_off_date(cut_off_date): raise ValueError("Incorrect cut off date")
-        self._cut_off_date = cut_off_date
-        
+
     def _is_valid_cut_off_date(self, cut_off_date: str) -> bool:
-        # NO CAMBIAR EL ORDEN DE LAS SENTENCIAS PQ EXPLOTA
-        is_string = self._is_date_string(cut_off_date)
+        # Validate parameter
+        if not cut_off_date: raise ValueError("Cut off date can't be empty")
+        
+        # Verify parameter type
+        if not isinstance(cut_off_date, str): raise ValueError("Cut off date must be a string")
+        
+        # Validate the cut off date
         is_correct_format = self._correct_date_format(cut_off_date)
         is_before_payment_date = self._is_cut_off_date_before_payment_date(cut_off_date)
-        is_valid = is_string and is_correct_format and is_before_payment_date
+        is_valid = is_correct_format and is_before_payment_date
         return is_valid
 
-    def _is_cut_off_date_before_payment_date(self, cut_off_date):
+    def _is_cut_off_date_before_payment_date(self, cut_off_date: str) -> bool:
+        # Validate parameter
+        if not cut_off_date: raise ValueError("Cut off date can't be empty")
+
+        # Verify parameter type
+        if not isinstance(cut_off_date, str): raise ValueError("Cut off date must be a string")
+        
+        # Check if the cut off date is before the payment date
         if cut_off_date < self._payment_date:
             return True
         else: 
             raise ValueError("The cut off date must be before the payment date")
 
-    def _is_date_string(self, date: str) -> bool:
-        if (isinstance(date, str)):
-            return True
-        else: 
-            raise ValueError("The date must be a string")
-    
     def _correct_date_format(self, date: str) -> bool:
+        # Validate parameter
+        if not date: raise ValueError("Date can't be empty")
+        
+        # Verify parameter type
+        if not isinstance(date, str): raise ValueError("Date must be a string")
+        
+        # Check if the date is in the correct format: YYYY-MM-DD
         correct_pattern = re.match(r"\d{4}-\d{2}-\d{2}", date)
         if correct_pattern:
             return True
@@ -112,41 +149,75 @@ class UserCard(models.Model):
         return self._balance
     
     def pay(self, payment: float):
+        # Validate parameter
+        if not payment: raise ValueError("Payment can't be empty")
+        
+        # Verify parameter
         if not self._is_correct_payment(payment): raise ValueError("Incorrect payment")
+
+        # Apply payment
         self._balance -= payment
 
     def _is_correct_payment(self, payment: float) -> bool:
+        # Validate parameter
+        if not payment: raise ValueError("Payment can't be empty")
+        
+        # Verify parameter type
+        if not isinstance(payment, float): raise ValueError("Payment must be a float")
+        
+        # Check if the payment is valid
         is_float = self._is_payment_correct_type(payment)
         is_a_significant_amount = self._is_the_payment_a_significant_amount(payment)
         not_too_big = self._is_the_payment_not_too_big(payment)
         is_valid = is_float and is_a_significant_amount and not_too_big
         return is_valid
 
-    def _is_the_payment_not_too_big(self, payment):
+    def _is_the_payment_not_too_big(self, payment: float) -> bool:
+        # Validate parameter
+        if not payment: raise ValueError("Payment can't be empty")
+        
+        # Verify parameter
+        if not isinstance(payment, float): raise ValueError("Payment must be a float")
+        
+        # Check if the payment is less than the balance
         if payment <= self._balance:
             return True
         else:
             raise ValueError("The payment must be less than the balance")
 
-    def _is_the_payment_a_significant_amount(self, payment):
+    def _is_the_payment_a_significant_amount(self, payment: float) -> bool:
+        # Validate parameter
+        if not payment: raise ValueError("Payment can't be empty")
+
+        # Verify parameter
+        if not isinstance(payment, float): raise ValueError("Payment must be a float")
+        
+        # Check if the payment is a significant amount
         if payment > 0:
             return True
         else:
             raise ValueError("The payment must be a significant amount")
 
-    def _is_payment_correct_type(self, payment):
+    def _is_payment_correct_type(self, payment: float) -> bool:
+        # Validate parameter
+        if not payment: raise ValueError("Payment can't be empty")
+        
+        # Verify parameter type
+        if not isinstance(payment, float): raise ValueError("Payment must be a float")
+        
+        # Check if the payment is a float
         if isinstance(payment, float):
             return True
         else:
             raise ValueError("Payment must be a float")
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         return {
             "id": self.get_id(),
-            "bank_card": self.get_bank_card().get_name(),  # Modify this according to your BankCard class
+            "bank_card": self.get_bank_card().get_name(),  
             "bank": self.get_bank(),
             "owner_name": self.get_owner_name(),
-            "payment_date": str(self.get_payment_date()),  # Converting date to string
+            "payment_date": str(self.get_payment_date()),  
             "cut_off_date": str(self.get_cut_off_date()),
             "balance": self.get_balance(),
         }
@@ -162,21 +233,42 @@ class Cardholder(models.Model):
         return list(self._cards.all())
 
     def get_card_by_name(self, name: str) -> UserCard:
+        # Verify parameter
+        if not name: raise ValueError("Name can't be empty")
+        
+        # Validate parameter type
+        if not isinstance(name, str): raise ValueError("Name must be a string")
+        
         all_cards = self.get_all_cards()
         card = self._search_card_by_name(all_cards, name)
         return card
     
-    def _search_card_by_name(self,all_cards:list[UserCard], name: str) -> UserCard:
+    def _search_card_by_name(self, all_cards:list[UserCard], name: str) -> UserCard:
+        # Verify parameter
+        if not all_cards: raise ValueError("Cards can't be empty")
+        if not name: raise ValueError("Name can't be empty")
+    
+        # Validate parameter type
+        if not isinstance(all_cards, list): raise ValueError("Cards must be a list")
+        if not all(isinstance(card, UserCard) for card in all_cards): raise ValueError("Cards must be a list of UserCard instances")
+        if not isinstance(name, str): raise ValueError("Name must be a string")
+        
         for card in all_cards:
             if card.get_bank_card().get_name() == name:
                 return card
         raise CardNotFoundError(name)
-        
 
     def remove_card(self, card: UserCard):
+        # Verify parameter
+        if not card: raise ValueError("Card can't be empty")
+        
+        # Validate parameter type
+        if not isinstance(card, UserCard): raise ValueError("Card must be a UserCard")
+        
         self._cards.remove(card)
 
 
+# Relationship 1(cardholder) -> N(user_card)
 class CardholderUserCard(models.Model):
     cardholder = models.ForeignKey(Cardholder, on_delete=models.CASCADE)
     user_card = models.ForeignKey(UserCard, on_delete=models.CASCADE)
@@ -188,21 +280,31 @@ class User(models.Model):
     _password = models.CharField(max_length=100, null=False)
     _cardholder = models.OneToOneField('Cardholder', on_delete=models.CASCADE, null=True)
     
-    def get_email(self):
+    def get_email(self) -> str:
         return self._email
 
-    def get_name(self):
+    def get_name(self) -> str:
         return self._name
 
-    def set_name(self, name):
+    def set_name(self, name: str):
+        # Verify parameter
+        if not name: raise ValueError("Name can't be empty")
+        
+        # Validate parameter type
         if not isinstance(name, str): raise ValueError("Name must be a string")
+
         self._name = name
 
-    def get_password(self):
+    def get_password(self) -> str:
         return self._password
 
-    def set_password(self, password):
+    def set_password(self, password: str):
+        # Verify parameter
+        if not password: raise ValueError("Password can't be empty")
+        
+        # Validate parameter type
         if not isinstance(password, str): raise ValueError("Password must be a string")
+
         self._password = password
     
     def get_cardholder(self) -> Cardholder:
@@ -236,12 +338,16 @@ class CardStatement(models.Model):
 class StatementHistory(models.Model):
     _statements = models.ManyToManyField(CardStatement, related_name='statement_histories')
     
-
     def get_all_statements(self) -> list[CardStatement]:
         return list(self._statements.all())
 
     def add_statement(self, statement: CardStatement):
+        # Verify parameter
+        if not statement: raise ValueError("Statement can't be empty")
+        
+        # Validate parameter type
         if not isinstance(statement, CardStatement): raise ValueError("Statement must be a CardStatement")
+
         self._statements.add(statement)
         
 
