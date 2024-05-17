@@ -3,7 +3,7 @@
     <h5 class="card-title">{{ card.get_name }}</h5>
     <p class="card-text">{{ card.get_bank }}</p>
 
-    <form action="{% url 'card' %}" method="post">
+    <form action="{% url 'card_details' %}" method="post">
       {% csrf_token %}
       <input type="hidden" name="card_id" value="{{ card.get_id }}" />
       <button type="submit" class="btn btn-primary">More info</button>

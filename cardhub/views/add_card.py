@@ -21,8 +21,8 @@ class AddCardView(View):
         user_card = UserCard.objects.create(
             _bank_card=bank_card,  
             _owner = self._query_user(request),  
-            _payment_date=date.today(),  
-            _cut_off_date=date.today() + timedelta(days=1),  
+            _payment_date=date.today() + timedelta(days=1),  
+            _cut_off_date=date.today(),  
             _balance=0.0  
             )
 

@@ -69,7 +69,7 @@ class UserCard(models.Model):
         return is_valid
 
     def _is_payment_date_after_cut_off_date(self, payment_date: str) -> bool:
-        if (payment_date > self._cut_off_date):
+        if (payment_date > self._cut_off_date.strftime('%Y-%m-%d')):
             return True
         else: 
             raise ValueError("The payment date must be after the cut off date")
@@ -90,7 +90,7 @@ class UserCard(models.Model):
         return is_valid
 
     def _is_cut_off_date_before_payment_date(self, cut_off_date):
-        if cut_off_date < self._payment_date:
+        if (cut_off_date < self._payment_date):
             return True
         else: 
             raise ValueError("The cut off date must be before the payment date")

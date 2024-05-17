@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<center>
+    <h1>User Card Information</h1>
+
+    {% include "message.html" %}
+
+    <form action="{% url 'card_details' %}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-secondary" type="submit" name="cancel">Return Home</button>
+    </form>
+    <p>{{ user_card.get_id }}</p>
+    <p>Card owner name: {{ user_card.get_owner_name }}</p>
+    <p>Card name: {{ user_card.get_name }}</p>
+    <p>Bank name: {{ user_card.get_bank }}</p>
+    <p>Card balance: {{ user_card.get_balance }}</p>
+    <p>Current Cut Off Date: {{ user_card.get_cut_off_date }}</p>
+    <p>Current Payment Date: {{ user_card.get_payment_date }}</p>
+
+    <form action="{% url 'edit_card' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="card_id" value="{{ user_card.get_id }}">
+
+        <button type="submit" class="btn btn-primary" name="edit_info">Edit details</button>
+    </form>
+
+</center>
+{% endblock content %}
