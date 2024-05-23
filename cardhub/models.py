@@ -59,6 +59,10 @@ class UserCard(models.Model):
         return self._payment_date
 
     def set_payment_date(self, payment_date: str):
+        """Buena práctica: Validar los datos antes de asignarlos.
+        # Verifica si la fecha de pago es válida antes de asignarla al atributo."""
+        if not self._is_valid_payment_date(payment_date): 
+            raise ValueError("Incorrect payment date")
         # Verify parameter
         if not payment_date: raise ValueError("Payment date can't be empty")
 
@@ -84,6 +88,9 @@ class UserCard(models.Model):
         self.save()
 
     def _is_valid_payment_date(self, payment_date: str) -> bool:
+        """Buena práctica: Divide la validación en pasos claros.
+        Verifica si la fecha es una cadena, tiene el formato correcto y es posterior a la fecha de corte."""
+        is_string = self._is_date_string(payment_date) 
         # Verify parameter exists
         if not payment_date: raise ValueError("Payment date can't be empty")
 
@@ -96,6 +103,10 @@ class UserCard(models.Model):
         is_valid =  is_correct_format and is_after_cut_off_date
         return is_valid
 
+    def _is_payment_date_after_cut_off_date(self, payment_date: str) -> bool: 
+        """Buena práctica: Claridad en las condiciones.
+        Compara las fechas y lanza una excepción si la fecha de pago no es posterior a la fecha de corte."""
+        if (payment_date > self._cut_off_date.strftime('%Y-%m-%d')):
     def _is_payment_date_after_cut_off_date(self, payment_date: str) -> bool:
         # Verify parameters
         if not payment_date: raise ValueError("Payment date can't be empty")
@@ -110,6 +121,10 @@ class UserCard(models.Model):
             raise ValueError("The payment date must be after the cut off date")
 
     def _is_valid_cut_off_date(self, cut_off_date: str) -> bool:
+        """Buena práctica: Divide la validación en pasos claros.
+        Verifica si la fecha es una cadena, tiene el formato correcto y es anterior a la fecha de pago."""
+        # NO CAMBIAR EL ORDEN DE LAS SENTENCIAS PQ EXPLOTA
+        is_string = self._is_date_string(cut_off_date)
         # Validate parameter
         if not cut_off_date: raise ValueError("Cut off date can't be empty")
         
@@ -254,9 +269,14 @@ class Cardholder(models.Model):
     _cards = models.ManyToManyField('UserCard', through='CardholderUserCard', related_name='cardholders')
 
     def add_card(self, card: UserCard):
+        """ Buena práctica: Uso de ManyToManyField para relaciones múltiples.
+         Permite agregar una tarjeta al cardholder de manera eficiente."""
         self._cards.add(card)
 
     def get_all_cards(self) -> list[UserCard]:
+        """ Buena práctica: Conversión a lista.
+         Retorna todas las tarjetas como una lista, lo que facilita su manipulación."""
+        return list(self._cards.all())
         return list(self._cards.all())
 
     def get_card_by_name(self, name: str) -> UserCard:
