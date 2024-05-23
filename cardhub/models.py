@@ -98,7 +98,7 @@ class UserCard(models.Model):
         if not isinstance(payment_date, str): raise ValueError("Payment date must be a string")
 
         # Check if the payment date is after the cut off date
-        if (payment_date > self.get_cut_off_date()):
+        if (payment_date > str(self.get_cut_off_date())):
             return True
         else: 
             raise ValueError("The payment date must be after the cut off date")
@@ -124,7 +124,7 @@ class UserCard(models.Model):
         if not isinstance(cut_off_date, str): raise ValueError("Cut off date must be a string")
         
         # Check if the cut off date is before the payment date
-        if cut_off_date < self._payment_date:
+        if (cut_off_date < str(self._payment_date)):
             return True
         else: 
             raise ValueError("The cut off date must be before the payment date")
