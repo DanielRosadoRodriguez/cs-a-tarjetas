@@ -31,7 +31,8 @@ class CardDetails(View):
     
     def _build_response(self, request):
         user_card = self._query_user_card(request)
-        user_card_view = render(request, 'card_details.html', {'user_card': user_card})
+        statement_history = user_card.get_statement_history().get_all_statements()
+        user_card_view = render(request, 'card_details.html', {'user_card': user_card, 'statement_history': statement_history})
         return user_card_view
 
     def _query_user_card(self, request):

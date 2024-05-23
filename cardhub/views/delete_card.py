@@ -16,7 +16,7 @@ class DeleteCard(View):
         owner = card_to_remove.get_owner()
         cardholder = owner.get_cardholder()
         cardholder.remove_card(card_to_remove)
-
+ 
     def _delete_card_from_db(self, request):
         card_to_remove = self._get_card_to_remove(request)
         card_to_remove.delete()

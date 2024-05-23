@@ -2,7 +2,7 @@ from datetime import date, timedelta
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import View
-from cardhub.models import BankCard, User, UserCard
+from cardhub.models import BankCard, User, UserCard, StatementHistory
 
 class AddCardView(View):
     
@@ -18,12 +18,15 @@ class AddCardView(View):
     def post(self, request):
         card_id = request.POST['card_id']  
         bank_card = BankCard.objects.get(_id=card_id)
+        statement_history = StatementHistory.objects.create()
+
         user_card = UserCard.objects.create(
             _bank_card=bank_card,  
             _owner = self._query_user(request),  
             _payment_date=date.today() + timedelta(days=1),  
             _cut_off_date=date.today(),  
-            _balance=0.0  
+            _balance=0.0,
+            _statement_history=statement_history
             )
 
         cardholder = self._query_user(request).get_cardholder()
