@@ -8,6 +8,7 @@ from datetime import date, datetime
 from django.contrib import messages
 
 
+
 class EditCard(View):
 
 
@@ -35,18 +36,42 @@ class EditCard(View):
             date = datetime.now()
             debt = user_card.get_balance()
             interest = user_card.get_interest()
+            
             statement = CardStatement.objects.create(
                 _card=user_card,
                 _owner_name=owner_name,
                 _date=date,
                 _debt=debt,
                 _interest=interest
-                )
+            )
+            
             history.add_statement(statement=statement)
+            
+            cut_off_date = user_card.get_cut_off_date()
+            payment_date = user_card.get_payment_date()
+            
+            # Increment the month while handling year transition
+           
+            new_cut_off_date = str(self._increment_month(cut_off_date))
+            new_payment_date = str(self._increment_month(payment_date))
+            
+            user_card.set_payment_date(new_payment_date)
+            user_card.set_cut_off_date(new_cut_off_date)
+            user_card.save()
+            
             return self._go_to_card_details(request)
+  
         else:
             return self._build_response(request)
 
+    def _increment_month(self, date_obj):
+        new_month = date_obj.month + 1
+        new_year = date_obj.year
+        if new_month > 12:
+            new_month = 1
+            new_year += 1
+        return date_obj.replace(year=new_year, month=new_month)
+ 
     def _add_expenses(self, request, expenses):
         try:
             user_card = self._query_user_card(request)
