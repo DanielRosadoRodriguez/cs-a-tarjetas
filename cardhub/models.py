@@ -679,28 +679,3 @@ class StatementHistory(models.Model):
 
         self._statements.add(statement)
 
-
-# DELETE
-class AccountStatement(models.Model):
-    card = models.ForeignKey(UserCard, on_delete=models.CASCADE)
-    date = models.DateField(auto_now_add=True)
-    total_debt = models.FloatField(default=0.0)
-    total_payments = models.FloatField(default=0.0)
-
-    def add_payment(self, payment):
-        if not isinstance(payment, (float, int)):
-            raise TypeError("El pago debe ser un número")
-        if payment > self.total_debt:
-            raise ValueError("El pago no puede ser mayor que la deuda pendiente")
-        self.total_payments += payment
-        self.total_debt -= payment
-        self.save()
-    
-    def add_charge(self, amount):
-        if not isinstance(amount, (float, int)):
-            raise TypeError("El monto debe ser un número")
-        self.total_debt += amount
-        self.save()
-
-    def __str__(self):
-        return f"Statement for {self.card.get_name()} on {self.date}"
