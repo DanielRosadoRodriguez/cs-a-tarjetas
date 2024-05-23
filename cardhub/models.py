@@ -242,6 +242,9 @@ class UserCard(models.Model):
             "cut_off_date": str(self.get_cut_off_date()),
             "balance": self.get_balance(),
         }
+    
+    def get_interest(self) -> float:
+        return self.get_bank_card().get_interest_rate()
 
 
 class Cardholder(models.Model):

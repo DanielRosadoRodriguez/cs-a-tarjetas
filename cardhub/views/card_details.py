@@ -43,5 +43,6 @@ class CardDetails(View):
     def _show_updated_values(self, request):
         card_id = request.session['card_id']
         user_card = UserCard.objects.get(_id=card_id)
-        user_card_view = render(request, 'card_details.html', {'user_card': user_card})
+        statement_history = user_card.get_statement_history().get_all_statements()
+        user_card_view = render(request, 'card_details.html', {'user_card': user_card, 'statement_history': statement_history})
         return user_card_view

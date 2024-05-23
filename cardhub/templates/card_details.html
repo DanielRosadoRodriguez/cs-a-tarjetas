@@ -24,6 +24,15 @@
         <button type="submit" class="btn btn-primary" name="edit_info">Edit details</button>
     </form>
 
+    <br>
+
+    <form action="{% url 'edit_card' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="card_id" value="{{ user_card.get_id }}">
+
+        <button type="submit" class="btn btn-primary" name="add_statement">Add Card Statement</button>
+    </form>
+
 </center>
     {% include "statement_history.html" %}
 

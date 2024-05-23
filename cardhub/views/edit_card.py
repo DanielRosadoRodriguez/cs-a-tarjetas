@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.views import View
-from cardhub.models import UserCard
+from cardhub.models import UserCard, CardStatement
 from django.urls import reverse
 from django.shortcuts import redirect, render
 from cardhub.models import UserCard, WrongDateFormatException, BankCard
@@ -27,6 +27,22 @@ class EditCard(View):
         elif 'add_pay' in request.POST:
             pay = abs(float(request.POST.get('pay')))
             self._add_pay(request, pay)
+            return self._go_to_card_details(request)
+        elif 'add_statement' in request.POST:
+            user_card = self._query_user_card(request)
+            history = user_card.get_statement_history()
+            owner_name = user_card.get_owner_name()
+            date = datetime.now()
+            debt = user_card.get_balance()
+            interest = user_card.get_interest()
+            statement = CardStatement.objects.create(
+                _card=user_card,
+                _owner_name=owner_name,
+                _date=date,
+                _debt=debt,
+                _interest=interest
+                )
+            history.add_statement(statement=statement)
             return self._go_to_card_details(request)
         else:
             return self._build_response(request)
