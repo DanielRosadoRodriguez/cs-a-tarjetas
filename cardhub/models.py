@@ -1,11 +1,8 @@
-import json
 import re
 from django.db import models
 from cardhub.exceptions.CardNotFoundError import CardNotFoundError
 from cardhub.exceptions.WrongDateFormatException import WrongDateFormatException
-from django.core.serializers.json import DjangoJSONEncoder
-import datetime
-from django.utils import timezone
+
 
 
 class BankCard(models.Model):
