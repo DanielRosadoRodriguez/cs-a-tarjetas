@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views import View
 from cardhub.models import UserCard
@@ -10,14 +11,12 @@ from django.contrib import messages
 class CardDetails(View):
     
     def get(self, request):
-        return self._build_response(request)
+        return self._show_updated_values(request)
 
     def post(self, request):
-        print('HOLAAA MUNDO')
         if 'cancel' in request.POST:
             return self._go_to_home_page()
         elif 'edit_info' in request.POST:
-            print('Editar')
             return self._go_to_edit() 
         else:
             return self._build_response(request)
@@ -36,7 +35,12 @@ class CardDetails(View):
         return user_card_view
 
     def _query_user_card(self, request):
-        card_id = request.POST.get('card_id')  
+        card_id = request.POST['card_id'] 
         user_card = UserCard.objects.get(_id=card_id)
-        """print(card_id)"""
         return user_card
+
+    def _show_updated_values(self, request):
+        card_id = request.session['card_id']
+        user_card = UserCard.objects.get(_id=card_id)
+        user_card_view = render(request, 'card_details.html', {'user_card': user_card})
+        return user_card_view

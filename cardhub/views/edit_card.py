@@ -15,14 +15,12 @@ class EditCard(View):
         if 'cancel' in request.POST:
             return self._go_to_home_page()
         elif 'save_changes' in request.POST:
-            #card_id = request.POST.get('card_id')
+            card_id = request.POST['card_id']
             new_cut_off_date = request.POST.get('new_cut_off_date')
             new_payment_date = request.POST.get('new_payment_date')
-            print('Ya lo guarde')
             self.edit(request, new_cut_off_date, new_payment_date)
-            return self._go_to_card_details()
+            return self._go_to_card_details(request)
         else:
-            print('Editar')
             return self._build_response(request)
 
 
@@ -32,18 +30,19 @@ class EditCard(View):
         return user_card_view
 
     def _query_user_card(self, request):
-        card_id = request.POST.get('card_id')  
+        card_id = request.POST['card_id']  
         user_card = UserCard.objects.get(_id=card_id)
-        """print(card_id)"""
         return user_card
     
     def _go_to_home_page(self):
         home_url = reverse('home')
         return redirect(home_url)
     
-    def _go_to_card_details(self, card_id):
-        card_details_url = reverse('card_details') + f'?card_id={card_id}'
+    def _go_to_card_details(self, request):
+        request.session['card_id'] = request.POST['card_id']
+        card_details_url = reverse('card_details')
         return redirect(card_details_url)
+
     
     def date_to_str(self, input_date):
         # Validate parameter
@@ -75,5 +74,3 @@ class EditCard(View):
     def _send_error_message(self, request, error_message):
         messages.error(request, error_message)
         
-
-    
