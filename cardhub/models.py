@@ -58,18 +58,24 @@ class UserCard(models.Model):
         return self._payment_date
     
     def set_payment_date(self, payment_date: str):
-        if not self._is_valid_payment_date(payment_date): raise ValueError("Incorrect payment date")
+        """Buena práctica: Validar los datos antes de asignarlos.
+        # Verifica si la fecha de pago es válida antes de asignarla al atributo."""
+        if not self._is_valid_payment_date(payment_date): 
+            raise ValueError("Incorrect payment date")
         self._payment_date = payment_date
 
     def _is_valid_payment_date(self, payment_date: str) -> bool:
-        # NO MOVER EL ORDEN DE LAS SENTENCIAS PQ EXPLOTA
+        """Buena práctica: Divide la validación en pasos claros.
+        Verifica si la fecha es una cadena, tiene el formato correcto y es posterior a la fecha de corte."""
         is_string = self._is_date_string(payment_date) 
         is_correct_format = self._correct_date_format(payment_date)
         is_after_cut_off_date = self._is_payment_date_after_cut_off_date(payment_date)
         is_valid = is_string and is_correct_format and is_after_cut_off_date
         return is_valid
 
-    def _is_payment_date_after_cut_off_date(self, payment_date: str) -> bool:
+    def _is_payment_date_after_cut_off_date(self, payment_date: str) -> bool: 
+        """Buena práctica: Claridad en las condiciones.
+        Compara las fechas y lanza una excepción si la fecha de pago no es posterior a la fecha de corte."""
         if (payment_date > self._cut_off_date.strftime('%Y-%m-%d')):
             return True
         else: 
@@ -79,10 +85,14 @@ class UserCard(models.Model):
         return self._cut_off_date
     
     def set_cut_off_date(self, cut_off_date: str):
+        """Buena práctica: Validar los datos antes de asignarlos.
+        Verifica si la fecha de corte es válida antes de asignarla al atributo."""
         if not self._is_valid_cut_off_date(cut_off_date): raise ValueError("Incorrect cut off date")
         self._cut_off_date = cut_off_date
         
     def _is_valid_cut_off_date(self, cut_off_date: str) -> bool:
+        """Buena práctica: Divide la validación en pasos claros.
+        Verifica si la fecha es una cadena, tiene el formato correcto y es anterior a la fecha de pago."""
         # NO CAMBIAR EL ORDEN DE LAS SENTENCIAS PQ EXPLOTA
         is_string = self._is_date_string(cut_off_date)
         is_correct_format = self._correct_date_format(cut_off_date)
@@ -91,18 +101,24 @@ class UserCard(models.Model):
         return is_valid
 
     def _is_cut_off_date_before_payment_date(self, cut_off_date):
+        """ Buena práctica: Claridad en las condiciones.
+         Compara las fechas y lanza una excepción si la fecha de corte no es anterior a la fecha de pago."""
         if (cut_off_date < self._payment_date):
             return True
         else: 
             raise ValueError("The cut off date must be before the payment date")
 
     def _is_date_string(self, date: str) -> bool:
+        """ Buena práctica: Verificar el tipo de datos.
+         Verifica si la fecha es una cadena antes de continuar."""
         if (isinstance(date, str)):
             return True
         else: 
             raise ValueError("The date must be a string")
     
     def _correct_date_format(self, date: str) -> bool:
+        """ Buena práctica: Uso de expresiones regulares para validar el formato de la fecha.
+         Verifica si la fecha sigue el formato YYYY-MM-DD."""
         correct_pattern = re.match(r"\d{4}-\d{2}-\d{2}", date)
         if correct_pattern:
             return True
@@ -113,10 +129,14 @@ class UserCard(models.Model):
         return self._balance
     
     def pay(self, payment: float):
+        """ Buena práctica: Validar los pagos antes de procesarlos.
+         Verifica si el pago es válido antes de deducirlo del balance."""
         if not self._is_correct_payment(payment): raise ValueError("Incorrect payment")
         self._balance -= payment
 
     def _is_correct_payment(self, payment: float) -> bool:
+        """ Buena práctica: Divide la validación en pasos claros.
+         Verifica si el pago es un float, si es una cantidad significativa y si no excede el balance."""
         is_float = self._is_payment_correct_type(payment)
         is_a_significant_amount = self._is_the_payment_a_significant_amount(payment)
         not_too_big = self._is_the_payment_not_too_big(payment)
@@ -124,24 +144,32 @@ class UserCard(models.Model):
         return is_valid
 
     def _is_the_payment_not_too_big(self, payment):
+        """ Buena práctica: Claridad en las condiciones.
+         Verifica si el pago no excede el balance actual"""
         if payment <= self._balance:
             return True
         else:
             raise ValueError("The payment must be less than the balance")
 
     def _is_the_payment_a_significant_amount(self, payment):
+        """ Buena práctica: Claridad en las condiciones.
+         Verifica si el pago es una cantidad positiva."""
         if payment > 0:
             return True
         else:
             raise ValueError("The payment must be a significant amount")
 
     def _is_payment_correct_type(self, payment):
+        """ Buena práctica: Verificar el tipo de datos.
+         Verifica si el pago es un float antes de continuar."""
         if isinstance(payment, float):
             return True
         else:
             raise ValueError("Payment must be a float")
 
     def to_dict(self):
+        """ Buena práctica: Conversión clara de un objeto a diccionario.
+         Permite convertir el objeto UserCard a un diccionario de manera clara y organizada."""
         return {
             "id": self.get_id(),
             "bank_card": self.get_bank_card().get_name(),  # Modify this according to your BankCard class
@@ -157,9 +185,14 @@ class Cardholder(models.Model):
     _cards = models.ManyToManyField('UserCard', through='CardholderUserCard', related_name='cardholders')
 
     def add_card(self, card: UserCard):
+        """ Buena práctica: Uso de ManyToManyField para relaciones múltiples.
+         Permite agregar una tarjeta al cardholder de manera eficiente."""
         self._cards.add(card)
 
     def get_all_cards(self) -> list[UserCard]:
+        """ Buena práctica: Conversión a lista.
+         Retorna todas las tarjetas como una lista, lo que facilita su manipulación."""
+        return list(self._cards.all())
         return list(self._cards.all())
 
     def get_card_by_name(self, name: str) -> UserCard:
@@ -168,6 +201,8 @@ class Cardholder(models.Model):
         return card
     
     def _search_card_by_name(self,all_cards:list[UserCard], name: str) -> UserCard:
+        """ Buena práctica: Búsqueda clara en listas.
+         Itera sobre todas las tarjetas y retorna la tarjeta con el nombre correspondiente."""
         for card in all_cards:
             if card.get_bank_card().get_name() == name:
                 return card
@@ -175,6 +210,8 @@ class Cardholder(models.Model):
         
 
     def remove_card(self, card: UserCard):
+        """ Buena práctica: Uso de ManyToManyField para relaciones múltiples.
+         Permite remover una tarjeta del cardholder de manera eficiente."""
         self._cards.remove(card)
 
 
@@ -196,6 +233,8 @@ class User(models.Model):
         return self._name
 
     def set_name(self, name):
+        """Buena práctica: Verificar el tipo de datos
+        antes de asignar el valor."""
         if not isinstance(name, str): raise ValueError("Name must be a string")
         self._name = name
 
@@ -203,6 +242,8 @@ class User(models.Model):
         return self._password
 
     def set_password(self, password):
+        """Buena práctica: Verificar el tipo de datos
+        antes de asignar el valor."""
         if not isinstance(password, str): raise ValueError("Password must be a string")
         self._password = password
     
