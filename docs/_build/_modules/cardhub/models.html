@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cardhub.models &#8212; cardhub 1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../_static/documentation_options.js?v=29a6c3e3"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for cardhub.models</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">cardhub.exceptions.CardNotFoundError</span> <span class="kn">import</span> <span class="n">CardNotFoundError</span>
+<span class="kn">from</span> <span class="nn">cardhub.exceptions.WrongDateFormatException</span> <span class="kn">import</span> <span class="n">WrongDateFormatException</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+
+
+
+<div class="viewcode-block" id="BankCard">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.BankCard">[docs]</a>
+<span class="k">class</span> <span class="nc">BankCard</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    ADT: Tarjeta de banco</span>
+<span class="sd">    Def: En el contexto del problema, </span>
+<span class="sd">        representa a las tarjetas de banco disponibles </span>
+<span class="sd">        para que el usuario agregue a su tarjetero. </span>
+<span class="sd">        Debido a la naturaleza del producto, </span>
+<span class="sd">        todas las tarjetas de banco son tarjetas de crédito. </span>
+<span class="sd">        Nota: debido a que los valores asignados a la</span>
+<span class="sd">        tarjeta en sus respectivos atributos se obtienen </span>
+<span class="sd">        de una base de datos pre-armada, </span>
+<span class="sd">        estos no son modificables. </span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">_id</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">AutoField</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">_bank</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">_interest_rate</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="BankCard.get_id">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.BankCard.get_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: int</span>
+<span class="sd">        Def: Permite obtener el identificador único de la tarjeta de banco.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id</span></div>
+
+
+<div class="viewcode-block" id="BankCard.get_bank">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.BankCard.get_bank">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_bank</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: str</span>
+<span class="sd">        Def: Permite obtener el nombre del banco al que pertenece la tarjeta de banco.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bank</span></div>
+
+
+<div class="viewcode-block" id="BankCard.get_name">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.BankCard.get_name">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: str</span>
+<span class="sd">        Def: Permite obtener el nombre de la tarjeta de banco.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span></div>
+
+
+<div class="viewcode-block" id="BankCard.get_interest_rate">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.BankCard.get_interest_rate">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_interest_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: float</span>
+<span class="sd">        Def: Permite obtener la tasa de interés de la tarjeta de banco.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interest_rate</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="UserCard">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.UserCard">[docs]</a>
+<span class="k">class</span> <span class="nc">UserCard</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    ADT: Tarjeta de usuario</span>
+<span class="sd">    Def: Representa una tarjeta en posesión de un usuario de la aplicación. </span>
+<span class="sd">    Dado el contexto del problema </span>
+<span class="sd">    (la aplicación solo permite la gestión de tarjetas de crédito) </span>
+<span class="sd">    todas las tarjetas de usuario son, </span>
+<span class="sd">    necesariamente, una tarjeta de crédito. </span>
+<span class="sd">    El usuario puede poseer únicamente una copia de una misma tarjeta de banco </span>
+<span class="sd">    (e. g. Si el usuario posee una tarjeta de banco “BBVA Azúl&quot;, </span>
+<span class="sd">    no puede agregar otra tarjeta de banco “BBVA Azúl” a su tarjetero). </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">_id</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">AutoField</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">_bank_card</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">BankCard</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">_owner</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">_payment_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1">#The format is YYYY-MM-DD</span>
+    <span class="n">_cut_off_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1">#The format is YYYY-MM-DD</span>
+    <span class="n">_balance</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">_statement_history</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">OneToOneField</span><span class="p">(</span><span class="s1">&#39;StatementHistory&#39;</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<div class="viewcode-block" id="UserCard.get_statement_history">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.UserCard.get_statement_history">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_statement_history</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StatementHistory&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: StatementHistory</span>
+<span class="sd">        Def: Permite obtener el historial de estados de la tarjeta de usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_statement_history</span></div>
+
+    
+<div class="viewcode-block" id="UserCard.get_id">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.UserCard.get_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: int</span>
+<span class="sd">        Def: Permite obtener el identificador único de la tarjeta de usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id</span></div>
+
+    
+<div class="viewcode-block" id="UserCard.get_owner_name">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.UserCard.get_owner_name">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_owner_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: str</span>
+<span class="sd">        Def: Permite obtener el nombre del propietario de la tarjeta de usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_owner</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span></div>
+
+    
+<div class="viewcode-block" id="UserCard.get_owner">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.UserCard.get_owner">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_owner</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;User&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: User</span>
+<span class="sd">        Def: Permite obtener el propietario de la tarjeta de usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_owner</span></div>
+
+
+<div class="viewcode-block" id="UserCard.get_bank_card">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.UserCard.get_bank_card">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_bank_card</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BankCard</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: BankCard</span>
+<span class="sd">        Def: Permite obtener la tarjeta de banco asociada a la tarjeta de usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bank_card</span></div>
+
+    
+<div class="viewcode-block" id="UserCard.get_name">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.UserCard.get_name">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: str</span>
+<span class="sd">        Def: Permite obtener el nombre de la tarjeta de banco asociada a la tarjeta de usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bank_card</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span></div>
+
+    
+<div class="viewcode-block" id="UserCard.get_bank">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.UserCard.get_bank">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_bank</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: str</span>
+<span class="sd">        Def: Permite obtener el nombre del banco al que pertenece la tarjeta de banco asociada a la tarjeta de usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bank_card</span><span class="o">.</span><span class="n">get_bank</span><span class="p">()</span></div>
+
+    
+<div class="viewcode-block" id="UserCard.get_payment_date">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.UserCard.get_payment_date">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_payment_date</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: str</span>
+<span class="sd">        Def: Permite obtener la fecha de pago de la tarjeta de usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_payment_date</span></div>
+
+
+<div class="viewcode-block" id="UserCard.set_payment_date">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.UserCard.set_payment_date">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_payment_date</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: str</span>
+<span class="sd">        OUT: None</span>
+<span class="sd">        Def: Permite establecer la fecha de pago de la tarjeta de usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Verify parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">payment_date</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Payment date can&#39;t be empty&quot;</span><span class="p">)</span>
+        <span class="c1"># Validate parameter type</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_valid_payment_date</span><span class="p">(</span><span class="n">payment_date</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Incorrect payment date&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Set the payment date</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_payment_date</span> <span class="o">=</span> <span class="n">payment_date</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="UserCard.get_cut_off_date">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.UserCard.get_cut_off_date">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_cut_off_date</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: str</span>
+<span class="sd">        Def: Permite obtener la fecha de corte de la tarjeta de usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cut_off_date</span>   </div>
+
+
+<div class="viewcode-block" id="UserCard.set_cut_off_date">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.UserCard.set_cut_off_date">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_cut_off_date</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cut_off_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: str</span>
+<span class="sd">        OUT: None</span>
+<span class="sd">        Def: Permite establecer la fecha de corte de la tarjeta de usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Validate parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">cut_off_date</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cut off date can&#39;t be empty&quot;</span><span class="p">)</span>
+        <span class="c1"># Verify parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_valid_cut_off_date</span><span class="p">(</span><span class="n">cut_off_date</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Incorrect cut off date&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Set the cut off date</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cut_off_date</span> <span class="o">=</span> <span class="n">cut_off_date</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_is_valid_payment_date</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: str</span>
+<span class="sd">        OUT: bool</span>
+<span class="sd">        Def: Permite verificar si la fecha de pago de la tarjeta de usuario es válida.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Verify parameter exists</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">payment_date</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Payment date can&#39;t be empty&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Validate parameter type</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">payment_date</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Payment date must be a string&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Check if the payment date is valid</span>
+        <span class="n">is_correct_format</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_correct_date_format</span><span class="p">(</span><span class="n">payment_date</span><span class="p">)</span>
+        <span class="n">is_after_cut_off_date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_payment_date_after_cut_off_date</span><span class="p">(</span><span class="n">payment_date</span><span class="p">)</span>
+        <span class="n">is_valid</span> <span class="o">=</span>  <span class="n">is_correct_format</span> <span class="ow">and</span> <span class="n">is_after_cut_off_date</span>
+        <span class="k">return</span> <span class="n">is_valid</span>
+
+    <span class="k">def</span> <span class="nf">_is_payment_date_after_cut_off_date</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: str</span>
+<span class="sd">        OUT: bool</span>
+<span class="sd">        Def: Permite verificar si la fecha de pago de la tarjeta de usuario es posterior a la fecha de corte.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Verify parameters</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">payment_date</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Payment date can&#39;t be empty&quot;</span><span class="p">)</span>
+        <span class="c1"># Validate parameters</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">payment_date</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Payment date must be a string&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Check if the payment date is after the cut off date</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">payment_date</span> <span class="o">&gt;</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_cut_off_date</span><span class="p">())):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The payment date must be after the cut off date&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_is_valid_cut_off_date</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cut_off_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: str</span>
+<span class="sd">        OUT: bool</span>
+<span class="sd">        Def: Permite verificar si la fecha de corte de la tarjeta de usuario es válida.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Validate parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">cut_off_date</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cut off date can&#39;t be empty&quot;</span><span class="p">)</span>
+        <span class="c1"># Verify parameter type</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cut_off_date</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cut off date must be a string&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Validate the cut off date</span>
+        <span class="n">is_correct_format</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_correct_date_format</span><span class="p">(</span><span class="n">cut_off_date</span><span class="p">)</span>
+        <span class="n">is_before_payment_date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_cut_off_date_before_payment_date</span><span class="p">(</span><span class="n">cut_off_date</span><span class="p">)</span>
+        <span class="n">is_valid</span> <span class="o">=</span> <span class="n">is_correct_format</span> <span class="ow">and</span> <span class="n">is_before_payment_date</span>
+        <span class="k">return</span> <span class="n">is_valid</span>
+
+    <span class="k">def</span> <span class="nf">_is_cut_off_date_before_payment_date</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cut_off_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: str</span>
+<span class="sd">        OUT: bool</span>
+<span class="sd">        Def: Permite verificar si la fecha de corte de la tarjeta de usuario es anterior a la fecha de pago.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Validate parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">cut_off_date</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cut off date can&#39;t be empty&quot;</span><span class="p">)</span>
+        <span class="c1"># Verify parameter type</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cut_off_date</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cut off date must be a string&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Check if the cut off date is before the payment date</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">cut_off_date</span> <span class="o">&lt;</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_payment_date</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The cut off date must be before the payment date&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_correct_date_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: str</span>
+<span class="sd">        OUT: bool</span>
+<span class="sd">        Def: Permite verificar si la fecha de la tarjeta de usuario tiene el formato correcto. YYYY-MM-DD</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Validate parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">date</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Date can&#39;t be empty&quot;</span><span class="p">)</span>
+        <span class="c1"># Verify parameter type</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Date must be a string&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Check if the date is in the correct format: YYYY-MM-DD</span>
+        <span class="n">correct_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\d</span><span class="si">{4}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
+        
+        <span class="c1"># Revisa si el resultado es correcto, si no arroja una excepción que indica que la fecha debe tener el formato correcto</span>
+        <span class="k">if</span> <span class="n">correct_pattern</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">WrongDateFormatException</span><span class="p">(</span><span class="s2">&quot;The date must be in the format YYYY-MM-DD&quot;</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="UserCard.get_balance">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.UserCard.get_balance">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_balance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: float</span>
+<span class="sd">        Def: Permite obtener el saldo de la tarjeta de usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span></div>
+
+    
+<div class="viewcode-block" id="UserCard.pay">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.UserCard.pay">[docs]</a>
+    <span class="k">def</span> <span class="nf">pay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: float</span>
+<span class="sd">        OUT: None</span>
+<span class="sd">        Def: Permite realizar un pago en la tarjeta de usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Validate parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">payment</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Payment can&#39;t be empty&quot;</span><span class="p">)</span>
+        <span class="c1"># Verify parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_correct_payment</span><span class="p">(</span><span class="n">payment</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Incorrect payment&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Apply payment</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">-=</span> <span class="n">payment</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_is_correct_payment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: float</span>
+<span class="sd">        OUT: bool</span>
+<span class="sd">        Def: Permite verificar si el pago es correcto.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Validate parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">payment</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Payment can&#39;t be empty&quot;</span><span class="p">)</span>
+        <span class="c1"># Verify parameter type</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">payment</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Payment must be a float&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Check if the payment is valid</span>
+        <span class="n">is_float</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_payment_correct_type</span><span class="p">(</span><span class="n">payment</span><span class="p">)</span>
+        <span class="n">is_a_significant_amount</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_the_payment_a_significant_amount</span><span class="p">(</span><span class="n">payment</span><span class="p">)</span>
+        <span class="n">not_too_big</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_the_payment_not_too_big</span><span class="p">(</span><span class="n">payment</span><span class="p">)</span>
+        <span class="n">is_valid</span> <span class="o">=</span> <span class="n">is_float</span> <span class="ow">and</span> <span class="n">is_a_significant_amount</span> <span class="ow">and</span> <span class="n">not_too_big</span>
+        <span class="k">return</span> <span class="n">is_valid</span>
+
+    <span class="k">def</span> <span class="nf">_is_the_payment_not_too_big</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: float</span>
+<span class="sd">        OUT: bool</span>
+<span class="sd">        Def: Permite verificar si el pago es menor al saldo de la tarjeta de usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Validate parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">payment</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Payment can&#39;t be empty&quot;</span><span class="p">)</span>
+        <span class="c1"># Verify parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">payment</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Payment must be a float&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Check if the payment is less than the balance</span>
+        <span class="k">if</span> <span class="n">payment</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The payment must be less than the balance&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_is_the_payment_a_significant_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        IN: float</span>
+<span class="sd">        OUT: bool</span>
+<span class="sd">        Def: Permite verificar si el pago es una cantidad significativa.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Validate parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">payment</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Payment can&#39;t be empty&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Verify parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">payment</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Payment must be a float&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Se revisa que la cantidad ingresada sea significativa y si no lo es arroja una excepción</span>
+        <span class="k">if</span> <span class="n">payment</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The payment must be a significant amount&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_is_payment_correct_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: float</span>
+<span class="sd">        OUT: bool</span>
+<span class="sd">        Def: Permite verificar si el pago es un número flotante.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Validate parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">payment</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Payment can&#39;t be empty&quot;</span><span class="p">)</span>
+        <span class="c1"># Verify parameter type</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">payment</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Payment must be a float&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Revisa si el pago es un número flotante, si no arroja una excepción que indica que el pago debe ser un número flotante</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">payment</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Payment must be a float&quot;</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="UserCard.add_expense">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.UserCard.add_expense">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_expense</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expense</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: float</span>
+<span class="sd">        OUT: None</span>
+<span class="sd">        Def: Permite agregar un gasto a la tarjeta de usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Validate parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">expense</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Expense can&#39;t be empty&quot;</span><span class="p">)</span>
+        <span class="c1"># Verify parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expense</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Expense must be a float&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_correct_expense</span><span class="p">(</span><span class="n">expense</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Incorrect expense&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Apply expense</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">+=</span> <span class="n">expense</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_is_correct_expense</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expense</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: float</span>
+<span class="sd">        OUT: bool</span>
+<span class="sd">        Def: Permite verificar la cantidad ingresada como gasto es correcta.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Validate parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">expense</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Expense can&#39;t be empty&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Verify parameter type</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expense</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Expense must be a float&quot;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="kc">True</span>
+    
+<div class="viewcode-block" id="UserCard.to_dict">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.UserCard.to_dict">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: dict</span>
+<span class="sd">        Def: Permite obtener un diccionario con los atributos de la tarjeta de usuario.&#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_id</span><span class="p">(),</span>
+            <span class="s2">&quot;bank_card&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_bank_card</span><span class="p">()</span><span class="o">.</span><span class="n">get_name</span><span class="p">(),</span>  
+            <span class="s2">&quot;bank&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_bank</span><span class="p">(),</span>
+            <span class="s2">&quot;owner_name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_owner_name</span><span class="p">(),</span>
+            <span class="s2">&quot;payment_date&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_payment_date</span><span class="p">()),</span>  
+            <span class="s2">&quot;cut_off_date&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_cut_off_date</span><span class="p">()),</span>
+            <span class="s2">&quot;balance&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_balance</span><span class="p">(),</span>
+        <span class="p">}</span></div>
+
+    
+<div class="viewcode-block" id="UserCard.get_interest">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.UserCard.get_interest">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_interest</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: float</span>
+<span class="sd">        Def: Permite obtener el interés de la tarjeta de usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_bank_card</span><span class="p">()</span><span class="o">.</span><span class="n">get_interest_rate</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Cardholder">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.Cardholder">[docs]</a>
+<span class="k">class</span> <span class="nc">Cardholder</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    ADT: Tarjetero</span>
+<span class="sd">    Def: Esta clase representa un tarjetero que posee el usuario. </span>
+<span class="sd">    Este se instancia y se asocia a un usuario en el momento de creación del usuario. </span>
+<span class="sd">    En el tarjetero, un usuario almacena sus tarjetas, puede agregar tarjetas, </span>
+<span class="sd">    obtener una o todas y como eliminar una en el momento </span>
+<span class="sd">    que desee dejar de poseerla. </span>
+<span class="sd">    El tarjetero está vacío en el momento de su creación y </span>
+<span class="sd">    no tiene una cantidad máxima de tarjetas definido. </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">_cards</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="s1">&#39;UserCard&#39;</span><span class="p">,</span> <span class="n">through</span><span class="o">=</span><span class="s1">&#39;CardholderUserCard&#39;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;cardholders&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Cardholder.add_card">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.Cardholder.add_card">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_card</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">card</span><span class="p">:</span> <span class="n">UserCard</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: UserCard</span>
+<span class="sd">        OUT: None</span>
+<span class="sd">        Def: Permite agregar una tarjeta al tarjetero.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">card</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Cardholder.get_all_cards">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.Cardholder.get_all_cards">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_all_cards</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">UserCard</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: list[UserCard]</span>
+<span class="sd">        Def: Permite obtener todas las tarjetas del tarjetero.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="o">.</span><span class="n">all</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="Cardholder.get_card_by_name">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.Cardholder.get_card_by_name">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_card_by_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserCard</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: str</span>
+<span class="sd">        OUT: UserCard</span>
+<span class="sd">        Def: Permite obtener una tarjeta del tarjetero por su nombre.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Verify parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Name can&#39;t be empty&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Validate parameter type</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Name must be a string&quot;</span><span class="p">)</span>
+        
+        <span class="n">all_cards</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_all_cards</span><span class="p">()</span>
+        <span class="n">card</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_search_card_by_name</span><span class="p">(</span><span class="n">all_cards</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">card</span></div>
+
+    
+    <span class="k">def</span> <span class="nf">_search_card_by_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">all_cards</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="n">UserCard</span><span class="p">],</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserCard</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: list[UserCard], str</span>
+<span class="sd">        OUT: UserCard</span>
+<span class="sd">        Def: Permite buscar una tarjeta por su nombre en la lista de tarjetas.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Verify parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">all_cards</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cards can&#39;t be empty&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Name can&#39;t be empty&quot;</span><span class="p">)</span>
+    
+        <span class="c1"># Validate parameter type</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">all_cards</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cards must be a list&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">card</span><span class="p">,</span> <span class="n">UserCard</span><span class="p">)</span> <span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="n">all_cards</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cards must be a list of UserCard instances&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Name must be a string&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Itera la lista de todas las tarjetas hasta encontrar la tarjeta con el nombre ingresado</span>
+        <span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="n">all_cards</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">card</span><span class="o">.</span><span class="n">get_bank_card</span><span class="p">()</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span> <span class="o">==</span> <span class="n">name</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">card</span>
+        <span class="k">raise</span> <span class="n">CardNotFoundError</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Cardholder.remove_card">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.Cardholder.remove_card">[docs]</a>
+    <span class="k">def</span> <span class="nf">remove_card</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">card</span><span class="p">:</span> <span class="n">UserCard</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: UserCard</span>
+<span class="sd">        OUT: None</span>
+<span class="sd">        Def: Permite eliminar una tarjeta del tarjetero.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Verify parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">card</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Card can&#39;t be empty&quot;</span><span class="p">)</span>
+        <span class="c1"># Validate parameter type</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">card</span><span class="p">,</span> <span class="n">UserCard</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Card must be a UserCard&quot;</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">card</span><span class="p">)</span></div>
+</div>
+
+
+
+<span class="c1"># Relationship 1(cardholder) -&gt; N(user_card)</span>
+<div class="viewcode-block" id="CardholderUserCard">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.CardholderUserCard">[docs]</a>
+<span class="k">class</span> <span class="nc">CardholderUserCard</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Esta clase no representa un ADT en términos de negocio.</span>
+<span class="sd">    Esta clase se utiliza para definir la tabla intermedia</span>
+<span class="sd">    entre Cardholder y UserCard, para poder migrar la relación a la base de datos</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">cardholder</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Cardholder</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">user_card</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">UserCard</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="User">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.User">[docs]</a>
+<span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    ADT: UsuarioUsuario de la aplicación</span>
+<span class="sd">    Def: Esta entidad representa a los usuarios de </span>
+<span class="sd">    la aplicación que la utilizan para fines de dominio? </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">_email</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">_password</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">_cardholder</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">OneToOneField</span><span class="p">(</span><span class="s1">&#39;Cardholder&#39;</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="User.get_email">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.User.get_email">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_email</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: str</span>
+<span class="sd">        Def: Permite obtener el correo electrónico del usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_email</span></div>
+
+
+<div class="viewcode-block" id="User.get_name">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.User.get_name">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: str</span>
+<span class="sd">        Def: Permite obtener el nombre del usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span></div>
+
+
+<div class="viewcode-block" id="User.set_name">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.User.set_name">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: str</span>
+<span class="sd">        OUT: None</span>
+<span class="sd">        Def: Permite establecer el nombre del usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Verify parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Name can&#39;t be empty&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Validate parameter type</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Name must be a string&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span></div>
+
+
+<div class="viewcode-block" id="User.get_password">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.User.get_password">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_password</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: str</span>
+<span class="sd">        Def: Permite obtener la contraseña del usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_password</span></div>
+
+
+<div class="viewcode-block" id="User.set_password">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.User.set_password">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: str</span>
+<span class="sd">        OUT: None</span>
+<span class="sd">        Def: Permite establecer la contraseña del usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Verify parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">password</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Password can&#39;t be empty&quot;</span><span class="p">)</span>
+        <span class="c1"># Validate parameter type</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">password</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Password must be a string&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_password</span> <span class="o">=</span> <span class="n">password</span></div>
+
+    
+<div class="viewcode-block" id="User.get_cardholder">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.User.get_cardholder">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_cardholder</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cardholder</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: Cardholder</span>
+<span class="sd">        Def: Permite obtener el tarjetero del usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cardholder</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="CardStatement">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.CardStatement">[docs]</a>
+<span class="k">class</span> <span class="nc">CardStatement</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    ADT: Statement de tarjeta </span>
+<span class="sd">    Def: “Fotografía” del estado de una tarjeta en un momento dado. </span>
+<span class="sd">    Se genera uno de manera automática al llegar la fecha de corte de </span>
+<span class="sd">    la tarjeta de usuario. Debido a que estos valores son una imágen </span>
+<span class="sd">    de la tarjeta en el tiempo, no son modificables y solo se proveen </span>
+<span class="sd">    métodos accesorios “get.”</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_card</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">UserCard</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">_owner_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">_cut_off_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">_payment_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">_debt</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">_interest</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="CardStatement.get_card">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.CardStatement.get_card">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_card</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserCard</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: UserCard</span>
+<span class="sd">        Def: Permite obtener la tarjeta de usuario asociada al estado de tarjeta.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_card</span></div>
+
+
+<div class="viewcode-block" id="CardStatement.get_owner_name">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.CardStatement.get_owner_name">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_owner_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: str</span>
+<span class="sd">        Def: Permite obtener el nombre del propietario de la tarjeta de usuario.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_owner_name</span></div>
+
+
+<div class="viewcode-block" id="CardStatement.get_date">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.CardStatement.get_date">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_date</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: str</span>
+<span class="sd">        Def: Permite obtener la fecha del estado de tarjeta.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_date</span></div>
+
+    
+<div class="viewcode-block" id="CardStatement.get_cut_off_date">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.CardStatement.get_cut_off_date">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_cut_off_date</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: str</span>
+<span class="sd">        Def: Permite obtener la fecha de corte del estado de tarjeta.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cut_off_date</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="CardStatement.get_payment_date">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.CardStatement.get_payment_date">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_payment_date</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: str</span>
+<span class="sd">        Def: Permite obtener la fecha de pago del estado de tarjeta.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_payment_date</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CardStatement.get_debt">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.CardStatement.get_debt">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_debt</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: float</span>
+<span class="sd">        Def: Permite obtener la deuda del estado de tarjeta.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_debt</span></div>
+
+
+<div class="viewcode-block" id="CardStatement.get_interest">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.CardStatement.get_interest">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_interest</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interest</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="StatementHistory">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.StatementHistory">[docs]</a>
+<span class="k">class</span> <span class="nc">StatementHistory</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    ADT: Historial de Statements de una tarjeta </span>
+<span class="sd">    Def: Conjunto de Statements que se han generado para una User Card. </span>
+<span class="sd">    Permite agregar y obtener Statements mas no borrarlos ni editarlos. </span>
+<span class="sd">    Esto se debe a que un Statement es una “fotografía” </span>
+<span class="sd">    de una tarjeta al término de un mes, </span>
+<span class="sd">    permitir la eliminación de uno de estos sería permitir “borrar los hechos” </span>
+<span class="sd">    y su edición sería permitir “cambiar la realidad”. </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">_statements</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="n">CardStatement</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;statement_histories&#39;</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="StatementHistory.get_all_statements">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.StatementHistory.get_all_statements">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_all_statements</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">CardStatement</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        IN: None</span>
+<span class="sd">        OUT: list[CardStatement]</span>
+<span class="sd">        Def: Permite obtener todos los estados de tarjeta del historial.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_statements</span><span class="o">.</span><span class="n">all</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="StatementHistory.add_statement">
+<a class="viewcode-back" href="../../cardhub.html#cardhub.models.StatementHistory.add_statement">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_statement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">statement</span><span class="p">:</span> <span class="n">CardStatement</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        IN: CardStatement</span>
+<span class="sd">        OUT: None</span>
+<span class="sd">        Def: Permite agregar un estado de tarjeta al historial.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Verify parameter</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">statement</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Statement can&#39;t be empty&quot;</span><span class="p">)</span>
+        <span class="c1"># Validate parameter type</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">statement</span><span class="p">,</span> <span class="n">CardStatement</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Statement must be a CardStatement&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_statements</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">statement</span><span class="p">)</span></div>
+</div>
+
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">cardhub</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">cs-a-tarjetas</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Mauricio May, Luis Medina, Daniel Rosado.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

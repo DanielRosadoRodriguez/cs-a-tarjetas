@@ -577,14 +577,14 @@ class User(models.Model):
 
 
 class CardStatement(models.Model):
-    '''
+    """
     ADT: Statement de tarjeta 
     Def: “Fotografía” del estado de una tarjeta en un momento dado. 
     Se genera uno de manera automática al llegar la fecha de corte de 
     la tarjeta de usuario. Debido a que estos valores son una imágen 
     de la tarjeta en el tiempo, no son modificables y solo se proveen 
     métodos accesorios “get.”
-    '''
+    """
     _card = models.ForeignKey(UserCard, on_delete=models.CASCADE)
     _owner_name = models.CharField(max_length=100, null=False)
     _date = models.DateField(null=False)
@@ -667,11 +667,11 @@ class StatementHistory(models.Model):
         return list(self._statements.all())
 
     def add_statement(self, statement: CardStatement):
-        '''
+        """
         IN: CardStatement
         OUT: None
         Def: Permite agregar un estado de tarjeta al historial.
-        '''
+        """
         # Verify parameter
         if not statement: raise ValueError("Statement can't be empty")
         # Validate parameter type

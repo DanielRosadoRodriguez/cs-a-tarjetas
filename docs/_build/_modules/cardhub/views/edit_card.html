@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cardhub.views.edit_card &#8212; cardhub 1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../../_static/documentation_options.js?v=29a6c3e3"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for cardhub.views.edit_card</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">render</span>
+<span class="kn">from</span> <span class="nn">django.views</span> <span class="kn">import</span> <span class="n">View</span>
+<span class="kn">from</span> <span class="nn">cardhub.models</span> <span class="kn">import</span> <span class="n">UserCard</span><span class="p">,</span> <span class="n">CardStatement</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse</span>
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">render</span>
+<span class="kn">from</span> <span class="nn">cardhub.models</span> <span class="kn">import</span> <span class="n">UserCard</span><span class="p">,</span> <span class="n">WrongDateFormatException</span><span class="p">,</span> <span class="n">BankCard</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span><span class="p">,</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">messages</span>
+
+
+
+<div class="viewcode-block" id="EditCard">
+<a class="viewcode-back" href="../../../cardhub.views.html#cardhub.views.edit_card.EditCard">[docs]</a>
+<span class="k">class</span> <span class="nc">EditCard</span><span class="p">(</span><span class="n">View</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View for handling the editing of a user&#39;s card details.</span>
+
+<span class="sd">    This class-based view handles POST requests to edit card details, add expenses, </span>
+<span class="sd">    add payments, and add statements. It also manages navigation to different pages </span>
+<span class="sd">    based on user actions.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    post(request)</span>
+<span class="sd">        Handles POST requests to manage different user actions such as cancel, save changes,</span>
+<span class="sd">        add expenses, add payments, and add statements.</span>
+<span class="sd">    </span>
+<span class="sd">    date_to_str(input_date)</span>
+<span class="sd">        Converts a date object to a string formatted as &#39;YYYY-MM-DD&#39;.</span>
+<span class="sd">    </span>
+<span class="sd">    str_to_date(str_date)</span>
+<span class="sd">        Converts a string formatted as &#39;YYYY-MM-DD&#39; to a date object.</span>
+<span class="sd">    </span>
+<span class="sd">    edit(request, new_cut_off_date, new_payment_date)</span>
+<span class="sd">        Helper method to edit and save the new cut-off and payment dates for the user&#39;s card.</span>
+<span class="sd">        </span>
+<span class="sd">    _send_error_message(request, error_message)</span>
+<span class="sd">        Helper method to send an error message to the user.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+<div class="viewcode-block" id="EditCard.post">
+<a class="viewcode-back" href="../../../cardhub.views.html#cardhub.views.edit_card.EditCard.post">[docs]</a>
+    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handles POST requests to manage different user actions such as cancel, save changes,</span>
+<span class="sd">        add expenses, add payments, and add statements.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        request : HttpRequest</span>
+<span class="sd">            The request object containing the form submission data.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        HttpResponseRedirect or HttpResponse</span>
+<span class="sd">            A redirect response to the home or card details page, or the rendered edit card view.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check which button was pressed in the form</span>
+        <span class="k">if</span> <span class="s1">&#39;cancel&#39;</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_go_to_home_page</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="s1">&#39;save_changes&#39;</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">:</span>
+            <span class="n">card_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;card_id&#39;</span><span class="p">]</span>
+            <span class="n">new_cut_off_date</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;new_cut_off_date&#39;</span><span class="p">)</span>
+            <span class="n">new_payment_date</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;new_payment_date&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edit</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">new_cut_off_date</span><span class="p">,</span> <span class="n">new_payment_date</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_go_to_card_details</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s1">&#39;add_expenses&#39;</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">:</span>
+            <span class="n">expenses</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;expenses&#39;</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_expenses</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">expenses</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_go_to_card_details</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s1">&#39;add_pay&#39;</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">:</span>
+            <span class="n">pay</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;pay&#39;</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_pay</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pay</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_go_to_card_details</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s1">&#39;add_statement&#39;</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">:</span>
+            <span class="n">user_card</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_user_card</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+            <span class="n">history</span> <span class="o">=</span> <span class="n">user_card</span><span class="o">.</span><span class="n">get_statement_history</span><span class="p">()</span>
+            <span class="n">owner_name</span> <span class="o">=</span> <span class="n">user_card</span><span class="o">.</span><span class="n">get_owner_name</span><span class="p">()</span>
+            <span class="n">current_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+            <span class="n">debt</span> <span class="o">=</span> <span class="n">user_card</span><span class="o">.</span><span class="n">get_balance</span><span class="p">()</span>
+            <span class="n">interest</span> <span class="o">=</span> <span class="n">user_card</span><span class="o">.</span><span class="n">get_interest</span><span class="p">()</span>
+            
+            <span class="n">statement</span> <span class="o">=</span> <span class="n">CardStatement</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                <span class="n">_card</span><span class="o">=</span><span class="n">user_card</span><span class="p">,</span>
+                <span class="n">_owner_name</span><span class="o">=</span><span class="n">owner_name</span><span class="p">,</span>
+                <span class="n">_date</span><span class="o">=</span><span class="n">current_date</span><span class="p">,</span>
+                <span class="n">_payment_date</span><span class="o">=</span><span class="n">user_card</span><span class="o">.</span><span class="n">get_payment_date</span><span class="p">(),</span>
+                <span class="n">_cut_off_date</span><span class="o">=</span><span class="n">user_card</span><span class="o">.</span><span class="n">get_cut_off_date</span><span class="p">(),</span>
+                <span class="n">_debt</span><span class="o">=</span><span class="n">debt</span><span class="p">,</span>
+                <span class="n">_interest</span><span class="o">=</span><span class="n">interest</span>
+            <span class="p">)</span>
+            
+            <span class="n">history</span><span class="o">.</span><span class="n">add_statement</span><span class="p">(</span><span class="n">statement</span><span class="o">=</span><span class="n">statement</span><span class="p">)</span>
+            
+            <span class="n">cut_off_date</span> <span class="o">=</span> <span class="n">user_card</span><span class="o">.</span><span class="n">get_cut_off_date</span><span class="p">()</span>
+            <span class="n">payment_date</span> <span class="o">=</span> <span class="n">user_card</span><span class="o">.</span><span class="n">get_payment_date</span><span class="p">()</span>
+            
+            <span class="n">new_cut_off_date</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_increment_month</span><span class="p">(</span><span class="n">cut_off_date</span><span class="p">))</span>
+            <span class="n">new_payment_date</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_increment_month</span><span class="p">(</span><span class="n">payment_date</span><span class="p">))</span>
+            
+            <span class="n">user_card</span><span class="o">.</span><span class="n">set_payment_date</span><span class="p">(</span><span class="n">new_payment_date</span><span class="p">)</span>
+            <span class="n">user_card</span><span class="o">.</span><span class="n">set_cut_off_date</span><span class="p">(</span><span class="n">new_cut_off_date</span><span class="p">)</span>
+            <span class="n">user_card</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_go_to_card_details</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_response</span><span class="p">(</span><span class="n">request</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_increment_month</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date_obj</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Increments the month of a given date, handling year transition if needed.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        date_obj : date</span>
+<span class="sd">            The date object whose month is to be incremented.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        date</span>
+<span class="sd">            The date object with the incremented month.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">new_month</span> <span class="o">=</span> <span class="n">date_obj</span><span class="o">.</span><span class="n">month</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">new_year</span> <span class="o">=</span> <span class="n">date_obj</span><span class="o">.</span><span class="n">year</span>
+        <span class="c1"># Add correct date for a new year</span>
+        <span class="k">if</span> <span class="n">new_month</span> <span class="o">&gt;</span> <span class="mi">12</span><span class="p">:</span>
+            <span class="n">new_month</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">new_year</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">date_obj</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">new_year</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="n">new_month</span><span class="p">)</span>
+ 
+    <span class="k">def</span> <span class="nf">_add_expenses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">expenses</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds expenses to the user&#39;s card.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        request : HttpRequest</span>
+<span class="sd">            The request object containing the form submission data.</span>
+<span class="sd">        expenses : float</span>
+<span class="sd">            The amount of expenses to be added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">user_card</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_user_card</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+            <span class="n">user_card</span><span class="o">.</span><span class="n">add_expense</span><span class="p">(</span><span class="n">expenses</span><span class="p">)</span>
+            <span class="n">user_card</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_send_success_message</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">error_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Error adding expenses: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_send_error_message</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">error_message</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">_add_pay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">pay</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a payment to the user&#39;s card.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        request : HttpRequest</span>
+<span class="sd">            The request object containing the form submission data.</span>
+<span class="sd">        pay : float</span>
+<span class="sd">            The amount of payment to be added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">user_card</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_user_card</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+            <span class="n">user_card</span><span class="o">.</span><span class="n">pay</span><span class="p">(</span><span class="n">pay</span><span class="p">)</span>
+            <span class="n">user_card</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_send_success_message</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">error_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Error adding pay: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_send_error_message</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">error_message</span><span class="p">)</span>
+            
+    <span class="k">def</span> <span class="nf">_build_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Builds the response for rendering the edit card page.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        request : HttpRequest</span>
+<span class="sd">            The request object used to generate this response.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        HttpResponse</span>
+<span class="sd">            The rendered edit card view with the user&#39;s card details.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">user_card</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_user_card</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="n">user_card_view</span> <span class="o">=</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;edit_card.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;user_card&#39;</span><span class="p">:</span> <span class="n">user_card</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">user_card_view</span>
+
+    <span class="k">def</span> <span class="nf">_query_user_card</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the UserCard object based on the provided card ID in the POST request.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        request : HttpRequest</span>
+<span class="sd">            The request object containing the form submission data.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        UserCard</span>
+<span class="sd">            The UserCard object corresponding to the provided card ID.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">card_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;card_id&#39;</span><span class="p">]</span>  
+        <span class="n">user_card</span> <span class="o">=</span> <span class="n">UserCard</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_id</span><span class="o">=</span><span class="n">card_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">user_card</span>
+    
+    <span class="k">def</span> <span class="nf">_go_to_home_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Redirects the user to the home page.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        HttpResponseRedirect</span>
+<span class="sd">            A redirect response to the home page.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">home_url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">home_url</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">_go_to_card_details</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Redirects the user to the card details page.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        request : HttpRequest</span>
+<span class="sd">            The request object used to generate this response.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        HttpResponseRedirect</span>
+<span class="sd">            A redirect response to the card details page.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;card_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;card_id&#39;</span><span class="p">]</span>
+        <span class="n">card_details_url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;card_details&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">card_details_url</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="EditCard.date_to_str">
+<a class="viewcode-back" href="../../../cardhub.views.html#cardhub.views.edit_card.EditCard.date_to_str">[docs]</a>
+    <span class="k">def</span> <span class="nf">date_to_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_date</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts a date object to a string formatted as &#39;YYYY-MM-DD&#39;.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        input_date : date</span>
+<span class="sd">            The date object to be converted.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            The formatted date string.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If the input date is empty or not a date object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">input_date</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input date can&#39;t be empty&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_date</span><span class="p">,</span> <span class="n">date</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cut off date must be a date&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">input_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="EditCard.str_to_date">
+<a class="viewcode-back" href="../../../cardhub.views.html#cardhub.views.edit_card.EditCard.str_to_date">[docs]</a>
+    <span class="k">def</span> <span class="nf">str_to_date</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">str_date</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts a string formatted as &#39;YYYY-MM-DD&#39; to a date object.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        str_date : str</span>
+<span class="sd">            The date string to be converted.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        date</span>
+<span class="sd">            The converted date object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">str_date</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="EditCard.edit">
+<a class="viewcode-back" href="../../../cardhub.views.html#cardhub.views.edit_card.EditCard.edit">[docs]</a>
+    <span class="k">def</span> <span class="nf">edit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">new_cut_off_date</span><span class="p">,</span> <span class="n">new_payment_date</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Edits and saves the new cut-off and payment dates for the user&#39;s card.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        request : HttpRequest</span>
+<span class="sd">            The request object containing the form submission data.</span>
+<span class="sd">        new_cut_off_date : str</span>
+<span class="sd">            The new cut-off date in string format.</span>
+<span class="sd">        new_payment_date : str</span>
+<span class="sd">            The new payment date in string format.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            True if the changes are saved successfully, False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">user_card</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_user_card</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+            <span class="n">user_card</span><span class="o">.</span><span class="n">set_payment_date</span><span class="p">(</span><span class="n">new_payment_date</span><span class="p">)</span>
+            <span class="n">user_card</span><span class="o">.</span><span class="n">set_cut_off_date</span><span class="p">(</span><span class="n">new_cut_off_date</span><span class="p">)</span>
+            <span class="n">user_card</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_send_success_message</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">error_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Error saving changes: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_send_error_message</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">error_message</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_send_success_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sends a success message to the user.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        request : HttpRequest</span>
+<span class="sd">            The request object containing the form submission data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">success_message</span> <span class="o">=</span> <span class="s1">&#39;Changes saved successfully&#39;</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">success_message</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">_send_error_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">error_message</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sends an error message to the user.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        request : HttpRequest</span>
+<span class="sd">            The request object containing the form submission data.</span>
+<span class="sd">        error_message : str</span>
+<span class="sd">            The error message to be sent.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">error_message</span><span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">cardhub</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">cs-a-tarjetas</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Mauricio May, Luis Medina, Daniel Rosado.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

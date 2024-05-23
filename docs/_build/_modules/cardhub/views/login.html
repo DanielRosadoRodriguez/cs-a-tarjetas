@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cardhub.views.login &#8212; cardhub 1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../../_static/documentation_options.js?v=29a6c3e3"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for cardhub.views.login</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">render</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse</span>
+<span class="kn">from</span> <span class="nn">django.views</span> <span class="kn">import</span> <span class="n">View</span>
+<span class="kn">from</span> <span class="nn">cardhub.domain.authenticator</span> <span class="kn">import</span> <span class="n">Authenticator</span>
+<span class="kn">from</span> <span class="nn">cardhub.exceptions.EmailNotRegisteredException</span> <span class="kn">import</span> <span class="n">EmailNotRegisteredException</span>
+<span class="kn">from</span> <span class="nn">cardhub.exceptions.IncorrectPasswordException</span> <span class="kn">import</span> <span class="n">IncorrectPasswordException</span>
+<span class="kn">from</span> <span class="nn">cardhub.forms</span> <span class="kn">import</span> <span class="n">LogInForm</span>
+<span class="kn">from</span> <span class="nn">cardhub.models</span> <span class="kn">import</span> <span class="n">User</span>
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">messages</span>
+
+
+<div class="viewcode-block" id="Login">
+<a class="viewcode-back" href="../../../cardhub.views.html#cardhub.views.login.Login">[docs]</a>
+<span class="k">class</span> <span class="nc">Login</span><span class="p">(</span><span class="n">View</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View for handling user login.</span>
+
+<span class="sd">    This class-based view handles GET and POST requests for the login page.</span>
+<span class="sd">    It renders the login form and processes user authentication.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    get(request)</span>
+<span class="sd">        Handles GET requests to render the login page.</span>
+<span class="sd">    </span>
+<span class="sd">    post(request)</span>
+<span class="sd">        Handles POST requests to authenticate the user.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+<div class="viewcode-block" id="Login.get">
+<a class="viewcode-back" href="../../../cardhub.views.html#cardhub.views.login.Login.get">[docs]</a>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handles GET requests to render the login page.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        request : HttpRequest</span>
+<span class="sd">            The request object containing the GET request data.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        HttpResponse</span>
+<span class="sd">            The rendered login view with an empty login form.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log_in_view</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_log_in_view</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">log_in_view</span></div>
+
+
+<div class="viewcode-block" id="Login.post">
+<a class="viewcode-back" href="../../../cardhub.views.html#cardhub.views.login.Login.post">[docs]</a>
+    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handles POST requests to authenticate the user.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        request : HttpRequest</span>
+<span class="sd">            The request object containing the POST request data.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        HttpResponseRedirect</span>
+<span class="sd">            A redirect response to the appropriate page based on the login result.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_log_in_user_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_log_in_user</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_log_in_user_response</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_build_log_in_view</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs the login view with an empty login form.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        request : HttpRequest</span>
+<span class="sd">            The request object used to generate this response.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        HttpResponse</span>
+<span class="sd">            The rendered login view with an empty login form.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log_in_form</span> <span class="o">=</span> <span class="n">LogInForm</span><span class="p">()</span>
+        <span class="n">log_in_view</span> <span class="o">=</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;login.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;form&#39;</span><span class="p">:</span> <span class="n">log_in_form</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">log_in_view</span>
+
+    <span class="k">def</span> <span class="nf">_log_in_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Authenticates the user based on the submitted login form.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        request : HttpRequest</span>
+<span class="sd">            The request object containing the POST data with the login form.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        HttpResponseRedirect</span>
+<span class="sd">            A redirect response to the home page if login is successful,</span>
+<span class="sd">            or back to the login page if login fails.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">LogInForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_go_back_to_log_in_page</span><span class="p">()</span>
+        
+        <span class="n">user_data</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Attempt to authenticate the user</span>
+            <span class="n">authenticated_user</span> <span class="o">=</span> <span class="n">Authenticator</span><span class="p">(</span>
+                <span class="n">users</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()),</span> 
+                <span class="n">email</span><span class="o">=</span><span class="n">user_data</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">],</span> 
+                <span class="n">password</span><span class="o">=</span><span class="n">user_data</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">authenticate_user</span><span class="p">()</span>
+            
+            <span class="n">successful_log_in_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Person: </span><span class="si">{</span><span class="n">authenticated_user</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="si">}</span><span class="s2"> has been logged in&quot;</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;usr_email&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">authenticated_user</span><span class="o">.</span><span class="n">get_email</span><span class="p">()</span>
+            <span class="n">messages</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">successful_log_in_message</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_go_to_home_page</span><span class="p">()</span>
+        <span class="k">except</span> <span class="n">EmailNotRegisteredException</span> <span class="k">as</span> <span class="n">email_exception</span><span class="p">:</span>
+            <span class="n">messages</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">email_exception</span><span class="p">))</span>
+        <span class="k">except</span> <span class="n">IncorrectPasswordException</span> <span class="k">as</span> <span class="n">password_exception</span><span class="p">:</span>
+            <span class="n">messages</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">password_exception</span><span class="p">))</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_go_back_to_log_in_page</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_go_back_to_log_in_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Redirects back to the login page.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        HttpResponseRedirect</span>
+<span class="sd">            A redirect response to the login page.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">login_url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">login_url</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_go_to_home_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Redirects the user to the home page after successful login.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        HttpResponseRedirect</span>
+<span class="sd">            A redirect response to the home page.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cardholder_page</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">cardholder_page</span><span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">cardhub</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">cs-a-tarjetas</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Mauricio May, Luis Medina, Daniel Rosado.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

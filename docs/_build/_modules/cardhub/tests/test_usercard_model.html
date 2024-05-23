@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cardhub.tests.test_usercard_model &#8212; cardhub 1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../../_static/documentation_options.js?v=29a6c3e3"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for cardhub.tests.test_usercard_model</h1><div class="highlight"><pre>
+<span></span>
+
+<span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">TestCase</span>
+<span class="kn">from</span> <span class="nn">cardhub.models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">UserCard</span><span class="p">,</span> <span class="n">BankCard</span>
+<span class="kn">from</span> <span class="nn">cardhub.exceptions.WrongDateFormatException</span> <span class="kn">import</span> <span class="n">WrongDateFormatException</span>
+
+<div class="viewcode-block" id="TestUserCard">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard">[docs]</a>
+<span class="k">class</span> <span class="nc">TestUserCard</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TestUserCard.setUp">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.setUp">[docs]</a>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">_email</span><span class="o">=</span><span class="s2">&quot;Tyrone@achtung.com&quot;</span><span class="p">,</span>
+                                        <span class="n">_name</span><span class="o">=</span><span class="s2">&quot;Tyrone&quot;</span><span class="p">,</span>
+                                        <span class="n">_password</span><span class="o">=</span><span class="s2">&quot;1234&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bank_card</span> <span class="o">=</span> <span class="n">BankCard</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">_bank</span><span class="o">=</span><span class="s2">&quot;Visa&quot;</span><span class="p">,</span>
+                                                 <span class="n">_name</span><span class="o">=</span><span class="s2">&quot;Azul&quot;</span><span class="p">,</span>
+                                                 <span class="n">_interest_rate</span><span class="o">=</span><span class="mf">0.21</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bank_card2</span> <span class="o">=</span> <span class="n">BankCard</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">_bank</span><span class="o">=</span><span class="s2">&quot;Mastercard&quot;</span><span class="p">,</span>
+                                                 <span class="n">_name</span><span class="o">=</span><span class="s2">&quot;Roja&quot;</span><span class="p">,</span>
+                                                 <span class="n">_interest_rate</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_card</span> <span class="o">=</span> <span class="n">UserCard</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">_bank_card</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">bank_card</span><span class="p">,</span>
+                                                 <span class="n">_owner</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
+                                                 <span class="n">_payment_date</span><span class="o">=</span><span class="s2">&quot;2021-10-10&quot;</span><span class="p">,</span>
+                                                 <span class="n">_cut_off_date</span><span class="o">=</span><span class="s2">&quot;2021-10-20&quot;</span><span class="p">,</span>
+                                                 <span class="n">_balance</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span></div>
+
+        
+
+    <span class="c1"># TEST  get_bank_card(self) -&gt; BankCard:</span>
+    
+<div class="viewcode-block" id="TestUserCard.test_get_bank_card_happy">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_get_bank_card_happy">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_get_bank_card_happy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">get_bank_card</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">bank_card</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="TestUserCard.test_get_bank_card_sad">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_get_bank_card_sad">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_get_bank_card_sad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertNotEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">get_bank_card</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">bank_card2</span><span class="p">)</span></div>
+
+    
+    <span class="c1"># TEST  get_payment_date(self) -&gt; str:</span>
+<div class="viewcode-block" id="TestUserCard.test_get_payment_date_happy">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_get_payment_date_happy">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_get_payment_date_happy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">get_payment_date</span><span class="p">(),</span> <span class="s2">&quot;2021-10-10&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="TestUserCard.test_get_payment_date_sad">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_get_payment_date_sad">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_get_payment_date_sad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertNotEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">get_payment_date</span><span class="p">(),</span> <span class="s2">&quot;2021-10-20&quot;</span><span class="p">)</span></div>
+
+    
+    <span class="c1"># TEST  set_payment_date(self, payment_date: str):</span>
+<div class="viewcode-block" id="TestUserCard.test_set_payment_date_happy">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_set_payment_date_happy">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_set_payment_date_happy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">new_payment_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;2021-10-25&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">set_payment_date</span><span class="p">(</span><span class="n">new_payment_date</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">get_payment_date</span><span class="p">(),</span> <span class="n">new_payment_date</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertNotEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">get_payment_date</span><span class="p">(),</span> <span class="s2">&quot;2021-10-10&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestUserCard.test_set_payment_date_sad_not_string">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_set_payment_date_sad_not_string">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_set_payment_date_sad_not_string</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">new_payment_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="mi">20211025</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">set_payment_date</span><span class="p">(</span><span class="n">new_payment_date</span><span class="p">)</span></div>
+
+            
+<div class="viewcode-block" id="TestUserCard.test_payment_date_sad_is_not_after_cut_off_date">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_payment_date_sad_is_not_after_cut_off_date">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_payment_date_sad_is_not_after_cut_off_date</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+        <span class="n">new_payment_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;2021-10-15&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">set_payment_date</span><span class="p">(</span><span class="n">new_payment_date</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestUserCard.test_payment_date_sad_is_not_correct_format">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_payment_date_sad_is_not_correct_format">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_payment_date_sad_is_not_correct_format</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">new_payment_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;102&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">WrongDateFormatException</span><span class="p">):</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">set_payment_date</span><span class="p">(</span><span class="n">new_payment_date</span><span class="p">)</span></div>
+
+        
+        
+    <span class="c1"># TEST  get_cut_off_date(self) -&gt; str:</span>
+
+<div class="viewcode-block" id="TestUserCard.test_get_cut_off_date_happy">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_get_cut_off_date_happy">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_get_cut_off_date_happy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">get_cut_off_date</span><span class="p">(),</span> <span class="s2">&quot;2021-10-20&quot;</span><span class="p">)</span></div>
+
+    
+    <span class="c1"># TEST  set_cut_off_date(self, cut_off_date: str):</span>
+<div class="viewcode-block" id="TestUserCard.test_set_cut_off_date_happy">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_set_cut_off_date_happy">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_set_cut_off_date_happy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">new_cut_off_date</span> <span class="o">=</span> <span class="s2">&quot;1000-01-01&quot;</span>
+        <span class="n">old_cut_off_date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">get_cut_off_date</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">set_cut_off_date</span><span class="p">(</span><span class="n">new_cut_off_date</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">get_cut_off_date</span><span class="p">(),</span> <span class="n">new_cut_off_date</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertNotEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">get_cut_off_date</span><span class="p">(),</span> <span class="n">old_cut_off_date</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestUserCard.test_set_cut_off_date_sad_is_not_string">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_set_cut_off_date_sad_is_not_string">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_set_cut_off_date_sad_is_not_string</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">new_cut_off_date</span> <span class="o">=</span> <span class="mi">10394549</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">set_cut_off_date</span><span class="p">(</span><span class="n">new_cut_off_date</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestUserCard.test_set_cut_off_date_sad_is_not_before_payment_date">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_set_cut_off_date_sad_is_not_before_payment_date">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_set_cut_off_date_sad_is_not_before_payment_date</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">new_cut_off_date</span> <span class="o">=</span> <span class="s2">&quot;2022-01-01&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">set_cut_off_date</span><span class="p">(</span><span class="n">new_cut_off_date</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="TestUserCard.test_set_cut_off_date_sad_is_not_correct_format">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_set_cut_off_date_sad_is_not_correct_format">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_set_cut_off_date_sad_is_not_correct_format</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">new_cut_off_date</span> <span class="o">=</span> <span class="s2">&quot;22/02/20&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">WrongDateFormatException</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">set_cut_off_date</span><span class="p">(</span><span class="n">new_cut_off_date</span><span class="p">)</span></div>
+
+
+    <span class="c1"># TEST  get_balance(self) -&gt; float:</span>
+<div class="viewcode-block" id="TestUserCard.test_get_balance_happy">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_get_balance_happy">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_get_balance_happy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">balance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">get_balance</span><span class="p">()</span>
+        <span class="n">expected_balance</span> <span class="o">=</span> <span class="mi">1000</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">balance</span><span class="p">,</span> <span class="n">expected_balance</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="TestUserCard.test_get_balance_sad">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_get_balance_sad">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_get_balance_sad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">balance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">get_balance</span><span class="p">()</span>
+        <span class="n">expected_balance</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertNotEqual</span><span class="p">(</span><span class="n">balance</span><span class="p">,</span> <span class="n">expected_balance</span><span class="p">)</span></div>
+
+        
+    <span class="c1"># TEST  pay(self, payment: float):</span>
+
+<div class="viewcode-block" id="TestUserCard.test_pay_happy">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_pay_happy">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_pay_happy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">payment</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">pay</span><span class="p">(</span><span class="n">payment</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">get_balance</span><span class="p">(),</span> <span class="mi">500</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="TestUserCard.test_pay_happy2">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_pay_happy2">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_pay_happy2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">payment</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">pay</span><span class="p">(</span><span class="n">payment</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">get_balance</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestUserCard.test_pay_happy3">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_pay_happy3">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_pay_happy3</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">payment</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">700</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">pay</span><span class="p">(</span><span class="n">payment</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">get_balance</span><span class="p">(),</span> <span class="mi">300</span><span class="p">)</span></div>
+
+        
+<div class="viewcode-block" id="TestUserCard.test_pay_sad_payment_is_too_big">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_pay_sad_payment_is_too_big">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_pay_sad_payment_is_too_big</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">payment</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">pay</span><span class="p">(</span><span class="n">payment</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="TestUserCard.test_pay_sad_payment_is_not_float">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_pay_sad_payment_is_not_float">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_pay_sad_payment_is_not_float</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">payment</span> <span class="o">=</span> <span class="mi">2000</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">pay</span><span class="p">(</span><span class="n">payment</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="TestUserCard.test_pay_sad_payment_is_negative">
+<a class="viewcode-back" href="../../../cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_pay_sad_payment_is_negative">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_pay_sad_payment_is_negative</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">payment</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="o">-</span><span class="mi">200</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">user_card</span><span class="o">.</span><span class="n">pay</span><span class="p">(</span><span class="n">payment</span><span class="p">)</span></div>
+</div>
+
+ 
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">cardhub</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">cs-a-tarjetas</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Mauricio May, Luis Medina, Daniel Rosado.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

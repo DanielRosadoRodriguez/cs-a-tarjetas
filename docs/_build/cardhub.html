@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cardhub package &#8212; cardhub 1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=29a6c3e3"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="cardhub.tests package" href="cardhub.tests.html" />
+    <link rel="prev" title="cs-a-tarjetas" href="modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cardhub-package">
+<h1>cardhub package<a class="headerlink" href="#cardhub-package" title="Link to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cardhub.tests.html">cardhub.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.tests.html#module-cardhub.tests.sdfsftest_signup_view">cardhub.tests.sdfsftest_signup_view module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.sdfsftest_signup_view.TestSignupView"><code class="docutils literal notranslate"><span class="pre">TestSignupView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.sdfsftest_signup_view.TestSignupView.setUp"><code class="docutils literal notranslate"><span class="pre">TestSignupView.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.sdfsftest_signup_view.TestSignupView.test_get"><code class="docutils literal notranslate"><span class="pre">TestSignupView.test_get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.sdfsftest_signup_view.TestSignupView.test_post"><code class="docutils literal notranslate"><span class="pre">TestSignupView.test_post()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.tests.html#cardhub-tests-test-bankcard-model-module">cardhub.tests.test_bankcard_model module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.tests.html#module-cardhub.tests.test_card_statement_model">cardhub.tests.test_card_statement_model module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_card_statement_model.TestCardStatementModel"><code class="docutils literal notranslate"><span class="pre">TestCardStatementModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_card_statement_model.TestCardStatementModel.setUp"><code class="docutils literal notranslate"><span class="pre">TestCardStatementModel.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_card_statement_model.TestCardStatementModel.test_get_card_happy"><code class="docutils literal notranslate"><span class="pre">TestCardStatementModel.test_get_card_happy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_card_statement_model.TestCardStatementModel.test_get_card_sad"><code class="docutils literal notranslate"><span class="pre">TestCardStatementModel.test_get_card_sad()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_card_statement_model.TestCardStatementModel.test_get_debt_happy"><code class="docutils literal notranslate"><span class="pre">TestCardStatementModel.test_get_debt_happy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_card_statement_model.TestCardStatementModel.test_get_debt_sad"><code class="docutils literal notranslate"><span class="pre">TestCardStatementModel.test_get_debt_sad()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_card_statement_model.TestCardStatementModel.test_get_interest_happy"><code class="docutils literal notranslate"><span class="pre">TestCardStatementModel.test_get_interest_happy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_card_statement_model.TestCardStatementModel.test_get_interest_sad"><code class="docutils literal notranslate"><span class="pre">TestCardStatementModel.test_get_interest_sad()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_card_statement_model.TestCardStatementModel.test_get_statement_date_happy"><code class="docutils literal notranslate"><span class="pre">TestCardStatementModel.test_get_statement_date_happy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_card_statement_model.TestCardStatementModel.test_get_statement_date_sad"><code class="docutils literal notranslate"><span class="pre">TestCardStatementModel.test_get_statement_date_sad()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_card_statement_model.TestCardStatementModel.test_get_username_happy"><code class="docutils literal notranslate"><span class="pre">TestCardStatementModel.test_get_username_happy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_card_statement_model.TestCardStatementModel.test_get_username_sad"><code class="docutils literal notranslate"><span class="pre">TestCardStatementModel.test_get_username_sad()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.tests.html#module-cardhub.tests.test_cardholder_mode">cardhub.tests.test_cardholder_mode module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_cardholder_mode.TestCardholderModel"><code class="docutils literal notranslate"><span class="pre">TestCardholderModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_cardholder_mode.TestCardholderModel.setUp"><code class="docutils literal notranslate"><span class="pre">TestCardholderModel.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_cardholder_mode.TestCardholderModel.test_add_card_happy"><code class="docutils literal notranslate"><span class="pre">TestCardholderModel.test_add_card_happy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_cardholder_mode.TestCardholderModel.test_add_card_happy_multiple"><code class="docutils literal notranslate"><span class="pre">TestCardholderModel.test_add_card_happy_multiple()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_cardholder_mode.TestCardholderModel.test_add_card_sad_not_card"><code class="docutils literal notranslate"><span class="pre">TestCardholderModel.test_add_card_sad_not_card()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_cardholder_mode.TestCardholderModel.test_get_all_cards_happy"><code class="docutils literal notranslate"><span class="pre">TestCardholderModel.test_get_all_cards_happy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_cardholder_mode.TestCardholderModel.test_get_all_cards_happy_multiple"><code class="docutils literal notranslate"><span class="pre">TestCardholderModel.test_get_all_cards_happy_multiple()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_cardholder_mode.TestCardholderModel.test_get_card_by_name_happy"><code class="docutils literal notranslate"><span class="pre">TestCardholderModel.test_get_card_by_name_happy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_cardholder_mode.TestCardholderModel.test_remove_card_happy"><code class="docutils literal notranslate"><span class="pre">TestCardholderModel.test_remove_card_happy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_cardholder_mode.TestCardholderModel.test_remove_card_happy_multiple"><code class="docutils literal notranslate"><span class="pre">TestCardholderModel.test_remove_card_happy_multiple()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_cardholder_mode.TestCardholderModel.test_remove_card_sad_not_card"><code class="docutils literal notranslate"><span class="pre">TestCardholderModel.test_remove_card_sad_not_card()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.tests.html#module-cardhub.tests.test_statement_history_model">cardhub.tests.test_statement_history_model module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_statement_history_model.TestStatementHistoryModel"><code class="docutils literal notranslate"><span class="pre">TestStatementHistoryModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_statement_history_model.TestStatementHistoryModel.setUp"><code class="docutils literal notranslate"><span class="pre">TestStatementHistoryModel.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_statement_history_model.TestStatementHistoryModel.test_add_statement_happy"><code class="docutils literal notranslate"><span class="pre">TestStatementHistoryModel.test_add_statement_happy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_statement_history_model.TestStatementHistoryModel.test_add_statement_sad_wrong_type"><code class="docutils literal notranslate"><span class="pre">TestStatementHistoryModel.test_add_statement_sad_wrong_type()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_statement_history_model.TestStatementHistoryModel.test_get_all_statements_happy_empty"><code class="docutils literal notranslate"><span class="pre">TestStatementHistoryModel.test_get_all_statements_happy_empty()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.tests.html#module-cardhub.tests.test_urls">cardhub.tests.test_urls module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_urls.TestUrls"><code class="docutils literal notranslate"><span class="pre">TestUrls</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_urls.TestUrls.test_signup_url_is_resolved"><code class="docutils literal notranslate"><span class="pre">TestUrls.test_signup_url_is_resolved()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.tests.html#module-cardhub.tests.test_user_model">cardhub.tests.test_user_model module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_user_model.TestUserModel"><code class="docutils literal notranslate"><span class="pre">TestUserModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_user_model.TestUserModel.setUp"><code class="docutils literal notranslate"><span class="pre">TestUserModel.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_user_model.TestUserModel.test_set_name"><code class="docutils literal notranslate"><span class="pre">TestUserModel.test_set_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_user_model.TestUserModel.test_set_password"><code class="docutils literal notranslate"><span class="pre">TestUserModel.test_set_password()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_user_model.TestUserModel.test_user_get_email"><code class="docutils literal notranslate"><span class="pre">TestUserModel.test_user_get_email()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_user_model.TestUserModel.test_user_get_name"><code class="docutils literal notranslate"><span class="pre">TestUserModel.test_user_get_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_user_model.TestUserModel.test_user_get_password"><code class="docutils literal notranslate"><span class="pre">TestUserModel.test_user_get_password()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.tests.html#module-cardhub.tests.test_usercard_model">cardhub.tests.test_usercard_model module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard"><code class="docutils literal notranslate"><span class="pre">TestUserCard</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.setUp"><code class="docutils literal notranslate"><span class="pre">TestUserCard.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_get_balance_happy"><code class="docutils literal notranslate"><span class="pre">TestUserCard.test_get_balance_happy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_get_balance_sad"><code class="docutils literal notranslate"><span class="pre">TestUserCard.test_get_balance_sad()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_get_bank_card_happy"><code class="docutils literal notranslate"><span class="pre">TestUserCard.test_get_bank_card_happy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_get_bank_card_sad"><code class="docutils literal notranslate"><span class="pre">TestUserCard.test_get_bank_card_sad()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_get_cut_off_date_happy"><code class="docutils literal notranslate"><span class="pre">TestUserCard.test_get_cut_off_date_happy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_get_payment_date_happy"><code class="docutils literal notranslate"><span class="pre">TestUserCard.test_get_payment_date_happy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_get_payment_date_sad"><code class="docutils literal notranslate"><span class="pre">TestUserCard.test_get_payment_date_sad()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_pay_happy"><code class="docutils literal notranslate"><span class="pre">TestUserCard.test_pay_happy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_pay_happy2"><code class="docutils literal notranslate"><span class="pre">TestUserCard.test_pay_happy2()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_pay_happy3"><code class="docutils literal notranslate"><span class="pre">TestUserCard.test_pay_happy3()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_pay_sad_payment_is_negative"><code class="docutils literal notranslate"><span class="pre">TestUserCard.test_pay_sad_payment_is_negative()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_pay_sad_payment_is_not_float"><code class="docutils literal notranslate"><span class="pre">TestUserCard.test_pay_sad_payment_is_not_float()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_pay_sad_payment_is_too_big"><code class="docutils literal notranslate"><span class="pre">TestUserCard.test_pay_sad_payment_is_too_big()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_payment_date_sad_is_not_after_cut_off_date"><code class="docutils literal notranslate"><span class="pre">TestUserCard.test_payment_date_sad_is_not_after_cut_off_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_payment_date_sad_is_not_correct_format"><code class="docutils literal notranslate"><span class="pre">TestUserCard.test_payment_date_sad_is_not_correct_format()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_set_cut_off_date_happy"><code class="docutils literal notranslate"><span class="pre">TestUserCard.test_set_cut_off_date_happy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_set_cut_off_date_sad_is_not_before_payment_date"><code class="docutils literal notranslate"><span class="pre">TestUserCard.test_set_cut_off_date_sad_is_not_before_payment_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_set_cut_off_date_sad_is_not_correct_format"><code class="docutils literal notranslate"><span class="pre">TestUserCard.test_set_cut_off_date_sad_is_not_correct_format()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_set_cut_off_date_sad_is_not_string"><code class="docutils literal notranslate"><span class="pre">TestUserCard.test_set_cut_off_date_sad_is_not_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_set_payment_date_happy"><code class="docutils literal notranslate"><span class="pre">TestUserCard.test_set_payment_date_happy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html#cardhub.tests.test_usercard_model.TestUserCard.test_set_payment_date_sad_not_string"><code class="docutils literal notranslate"><span class="pre">TestUserCard.test_set_payment_date_sad_not_string()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.tests.html#module-cardhub.tests">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cardhub.views.html">cardhub.views package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.views.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.views.html#module-cardhub.views.SignUp">cardhub.views.SignUp module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.views.html#cardhub.views.SignUp.Signup"><code class="docutils literal notranslate"><span class="pre">Signup</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.views.html#cardhub.views.SignUp.Signup.get"><code class="docutils literal notranslate"><span class="pre">Signup.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.views.html#cardhub.views.SignUp.Signup.post"><code class="docutils literal notranslate"><span class="pre">Signup.post()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.views.html#module-cardhub.views.add_card">cardhub.views.add_card module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.views.html#cardhub.views.add_card.AddCardView"><code class="docutils literal notranslate"><span class="pre">AddCardView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.views.html#cardhub.views.add_card.AddCardView.get"><code class="docutils literal notranslate"><span class="pre">AddCardView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.views.html#cardhub.views.add_card.AddCardView.post"><code class="docutils literal notranslate"><span class="pre">AddCardView.post()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.views.html#module-cardhub.views.card_details">cardhub.views.card_details module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.views.html#cardhub.views.card_details.CardDetails"><code class="docutils literal notranslate"><span class="pre">CardDetails</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.views.html#cardhub.views.card_details.CardDetails.get"><code class="docutils literal notranslate"><span class="pre">CardDetails.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.views.html#cardhub.views.card_details.CardDetails.post"><code class="docutils literal notranslate"><span class="pre">CardDetails.post()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.views.html#module-cardhub.views.confirm_card_addition">cardhub.views.confirm_card_addition module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.views.html#cardhub.views.confirm_card_addition.ConfirmCardAddition"><code class="docutils literal notranslate"><span class="pre">ConfirmCardAddition</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.views.html#cardhub.views.confirm_card_addition.ConfirmCardAddition.post"><code class="docutils literal notranslate"><span class="pre">ConfirmCardAddition.post()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.views.html#module-cardhub.views.confirm_card_deletion">cardhub.views.confirm_card_deletion module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.views.html#cardhub.views.confirm_card_deletion.ConfirmCardDeletion"><code class="docutils literal notranslate"><span class="pre">ConfirmCardDeletion</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.views.html#cardhub.views.confirm_card_deletion.ConfirmCardDeletion.post"><code class="docutils literal notranslate"><span class="pre">ConfirmCardDeletion.post()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.views.html#module-cardhub.views.delete_card">cardhub.views.delete_card module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.views.html#cardhub.views.delete_card.DeleteCard"><code class="docutils literal notranslate"><span class="pre">DeleteCard</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.views.html#cardhub.views.delete_card.DeleteCard.post"><code class="docutils literal notranslate"><span class="pre">DeleteCard.post()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.views.html#module-cardhub.views.edit_card">cardhub.views.edit_card module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.views.html#cardhub.views.edit_card.EditCard"><code class="docutils literal notranslate"><span class="pre">EditCard</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.views.html#cardhub.views.edit_card.EditCard.date_to_str"><code class="docutils literal notranslate"><span class="pre">EditCard.date_to_str()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.views.html#cardhub.views.edit_card.EditCard.edit"><code class="docutils literal notranslate"><span class="pre">EditCard.edit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.views.html#cardhub.views.edit_card.EditCard.post"><code class="docutils literal notranslate"><span class="pre">EditCard.post()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.views.html#cardhub.views.edit_card.EditCard.str_to_date"><code class="docutils literal notranslate"><span class="pre">EditCard.str_to_date()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.views.html#module-cardhub.views.home">cardhub.views.home module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.views.html#cardhub.views.home.HomeView"><code class="docutils literal notranslate"><span class="pre">HomeView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.views.html#cardhub.views.home.HomeView.get"><code class="docutils literal notranslate"><span class="pre">HomeView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.views.html#cardhub.views.home.HomeView.post"><code class="docutils literal notranslate"><span class="pre">HomeView.post()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.views.html#module-cardhub.views.login">cardhub.views.login module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.views.html#cardhub.views.login.Login"><code class="docutils literal notranslate"><span class="pre">Login</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.views.html#cardhub.views.login.Login.get"><code class="docutils literal notranslate"><span class="pre">Login.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.views.html#cardhub.views.login.Login.post"><code class="docutils literal notranslate"><span class="pre">Login.post()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.views.html#module-cardhub.views.welcome">cardhub.views.welcome module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.views.html#cardhub.views.welcome.Welcome"><code class="docutils literal notranslate"><span class="pre">Welcome</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.views.html#cardhub.views.welcome.Welcome.get"><code class="docutils literal notranslate"><span class="pre">Welcome.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.views.html#cardhub.views.welcome.Welcome.post"><code class="docutils literal notranslate"><span class="pre">Welcome.post()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cardhub.views.html#module-cardhub.views">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-cardhub.admin">
+<span id="cardhub-admin-module"></span><h2>cardhub.admin module<a class="headerlink" href="#module-cardhub.admin" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-cardhub.apps">
+<span id="cardhub-apps-module"></span><h2>cardhub.apps module<a class="headerlink" href="#module-cardhub.apps" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cardhub.apps.CardhubConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cardhub.apps.</span></span><span class="sig-name descname"><span class="pre">CardhubConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/apps.html#CardhubConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.apps.CardhubConfig" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.apps.CardhubConfig.default_auto_field">
+<span class="sig-name descname"><span class="pre">default_auto_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'django.db.models.BigAutoField'</span></em><a class="headerlink" href="#cardhub.apps.CardhubConfig.default_auto_field" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.apps.CardhubConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cardhub'</span></em><a class="headerlink" href="#cardhub.apps.CardhubConfig.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cardhub.forms">
+<span id="cardhub-forms-module"></span><h2>cardhub.forms module<a class="headerlink" href="#module-cardhub.forms" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cardhub.forms.LogInForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cardhub.forms.</span></span><span class="sig-name descname"><span class="pre">LogInForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/forms.html#LogInForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.forms.LogInForm" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Form</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.forms.LogInForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'email':</span> <span class="pre">&lt;django.forms.fields.EmailField</span> <span class="pre">object&gt;,</span> <span class="pre">'password':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cardhub.forms.LogInForm.base_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.forms.LogInForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'email':</span> <span class="pre">&lt;django.forms.fields.EmailField</span> <span class="pre">object&gt;,</span> <span class="pre">'password':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cardhub.forms.LogInForm.declared_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cardhub.forms.LogInForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#cardhub.forms.LogInForm.media" title="Link to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cardhub.forms.UserForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cardhub.forms.</span></span><span class="sig-name descname"><span class="pre">UserForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/forms.html#UserForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.forms.UserForm" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Form</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.forms.UserForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'email':</span> <span class="pre">&lt;django.forms.fields.EmailField</span> <span class="pre">object&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'password':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cardhub.forms.UserForm.base_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.forms.UserForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'email':</span> <span class="pre">&lt;django.forms.fields.EmailField</span> <span class="pre">object&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'password':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cardhub.forms.UserForm.declared_fields" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cardhub.forms.UserForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#cardhub.forms.UserForm.media" title="Link to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cardhub.models">
+<span id="cardhub-models-module"></span><h2>cardhub.models module<a class="headerlink" href="#module-cardhub.models" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cardhub.models.BankCard">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cardhub.models.</span></span><span class="sig-name descname"><span class="pre">BankCard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/models.html#BankCard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.BankCard" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>ADT: Tarjeta de banco
+Def: En el contexto del problema,</p>
+<blockquote>
+<div><p>representa a las tarjetas de banco disponibles 
+para que el usuario agregue a su tarjetero. 
+Debido a la naturaleza del producto, 
+todas las tarjetas de banco son tarjetas de crédito. 
+Nota: debido a que los valores asignados a la
+tarjeta en sus respectivos atributos se obtienen 
+de una base de datos pre-armada, 
+estos no son modificables.</p>
+</div></blockquote>
+<dl class="py exception">
+<dt class="sig sig-object py" id="cardhub.models.BankCard.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#cardhub.models.BankCard.DoesNotExist" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cardhub.models.BankCard.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#cardhub.models.BankCard.MultipleObjectsReturned" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.BankCard.get_bank">
+<span class="sig-name descname"><span class="pre">get_bank</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#BankCard.get_bank"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.BankCard.get_bank" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: str
+Def: Permite obtener el nombre del banco al que pertenece la tarjeta de banco.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.BankCard.get_id">
+<span class="sig-name descname"><span class="pre">get_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#BankCard.get_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.BankCard.get_id" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: int
+Def: Permite obtener el identificador único de la tarjeta de banco.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.BankCard.get_interest_rate">
+<span class="sig-name descname"><span class="pre">get_interest_rate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#BankCard.get_interest_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.BankCard.get_interest_rate" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: float
+Def: Permite obtener la tasa de interés de la tarjeta de banco.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.BankCard.get_name">
+<span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#BankCard.get_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.BankCard.get_name" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: str
+Def: Permite obtener el nombre de la tarjeta de banco.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.BankCard.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cardhub.models.BankCard.objects" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.BankCard.usercard_set">
+<span class="sig-name descname"><span class="pre">usercard_set</span></span><a class="headerlink" href="#cardhub.models.BankCard.usercard_set" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cardhub.models.CardStatement">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cardhub.models.</span></span><span class="sig-name descname"><span class="pre">CardStatement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/models.html#CardStatement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.CardStatement" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>ADT: Statement de tarjeta 
+Def: “Fotografía” del estado de una tarjeta en un momento dado. 
+Se genera uno de manera automática al llegar la fecha de corte de 
+la tarjeta de usuario. Debido a que estos valores son una imágen 
+de la tarjeta en el tiempo, no son modificables y solo se proveen 
+métodos accesorios “get.”</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="cardhub.models.CardStatement.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#cardhub.models.CardStatement.DoesNotExist" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cardhub.models.CardStatement.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#cardhub.models.CardStatement.MultipleObjectsReturned" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.CardStatement.get_card">
+<span class="sig-name descname"><span class="pre">get_card</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cardhub.models.UserCard" title="cardhub.models.UserCard"><span class="pre">UserCard</span></a></span></span><a class="reference internal" href="_modules/cardhub/models.html#CardStatement.get_card"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.CardStatement.get_card" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: UserCard
+Def: Permite obtener la tarjeta de usuario asociada al estado de tarjeta.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.CardStatement.get_cut_off_date">
+<span class="sig-name descname"><span class="pre">get_cut_off_date</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#CardStatement.get_cut_off_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.CardStatement.get_cut_off_date" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: str
+Def: Permite obtener la fecha de corte del estado de tarjeta.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.CardStatement.get_date">
+<span class="sig-name descname"><span class="pre">get_date</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#CardStatement.get_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.CardStatement.get_date" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: str
+Def: Permite obtener la fecha del estado de tarjeta.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.CardStatement.get_debt">
+<span class="sig-name descname"><span class="pre">get_debt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#CardStatement.get_debt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.CardStatement.get_debt" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: float
+Def: Permite obtener la deuda del estado de tarjeta.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.CardStatement.get_interest">
+<span class="sig-name descname"><span class="pre">get_interest</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#CardStatement.get_interest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.CardStatement.get_interest" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.CardStatement.get_next_by__cut_off_date">
+<span class="sig-name descname"><span class="pre">get_next_by__cut_off_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateField:</span> <span class="pre">_cut_off_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cardhub.models.CardStatement.get_next_by__cut_off_date" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.CardStatement.get_next_by__date">
+<span class="sig-name descname"><span class="pre">get_next_by__date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateField:</span> <span class="pre">_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cardhub.models.CardStatement.get_next_by__date" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.CardStatement.get_next_by__payment_date">
+<span class="sig-name descname"><span class="pre">get_next_by__payment_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateField:</span> <span class="pre">_payment_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cardhub.models.CardStatement.get_next_by__payment_date" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.CardStatement.get_owner_name">
+<span class="sig-name descname"><span class="pre">get_owner_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#CardStatement.get_owner_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.CardStatement.get_owner_name" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: str
+Def: Permite obtener el nombre del propietario de la tarjeta de usuario.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.CardStatement.get_payment_date">
+<span class="sig-name descname"><span class="pre">get_payment_date</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#CardStatement.get_payment_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.CardStatement.get_payment_date" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: str
+Def: Permite obtener la fecha de pago del estado de tarjeta.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.CardStatement.get_previous_by__cut_off_date">
+<span class="sig-name descname"><span class="pre">get_previous_by__cut_off_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateField:</span> <span class="pre">_cut_off_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cardhub.models.CardStatement.get_previous_by__cut_off_date" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.CardStatement.get_previous_by__date">
+<span class="sig-name descname"><span class="pre">get_previous_by__date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateField:</span> <span class="pre">_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cardhub.models.CardStatement.get_previous_by__date" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.CardStatement.get_previous_by__payment_date">
+<span class="sig-name descname"><span class="pre">get_previous_by__payment_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateField:</span> <span class="pre">_payment_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cardhub.models.CardStatement.get_previous_by__payment_date" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.CardStatement.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#cardhub.models.CardStatement.id" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.CardStatement.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cardhub.models.CardStatement.objects" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.CardStatement.statement_histories">
+<span class="sig-name descname"><span class="pre">statement_histories</span></span><a class="headerlink" href="#cardhub.models.CardStatement.statement_histories" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cardhub.models.Cardholder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cardhub.models.</span></span><span class="sig-name descname"><span class="pre">Cardholder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/models.html#Cardholder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.Cardholder" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>ADT: Tarjetero
+Def: Esta clase representa un tarjetero que posee el usuario. 
+Este se instancia y se asocia a un usuario en el momento de creación del usuario. 
+En el tarjetero, un usuario almacena sus tarjetas, puede agregar tarjetas, 
+obtener una o todas y como eliminar una en el momento 
+que desee dejar de poseerla. 
+El tarjetero está vacío en el momento de su creación y 
+no tiene una cantidad máxima de tarjetas definido.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="cardhub.models.Cardholder.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#cardhub.models.Cardholder.DoesNotExist" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cardhub.models.Cardholder.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#cardhub.models.Cardholder.MultipleObjectsReturned" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.Cardholder.add_card">
+<span class="sig-name descname"><span class="pre">add_card</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">card</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cardhub.models.UserCard" title="cardhub.models.UserCard"><span class="pre">UserCard</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/models.html#Cardholder.add_card"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.Cardholder.add_card" title="Link to this definition">¶</a></dt>
+<dd><p>IN: UserCard
+OUT: None
+Def: Permite agregar una tarjeta al tarjetero.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.Cardholder.cardholderusercard_set">
+<span class="sig-name descname"><span class="pre">cardholderusercard_set</span></span><a class="headerlink" href="#cardhub.models.Cardholder.cardholderusercard_set" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.Cardholder.get_all_cards">
+<span class="sig-name descname"><span class="pre">get_all_cards</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#cardhub.models.UserCard" title="cardhub.models.UserCard"><span class="pre">UserCard</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/cardhub/models.html#Cardholder.get_all_cards"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.Cardholder.get_all_cards" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: list[UserCard]
+Def: Permite obtener todas las tarjetas del tarjetero.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.Cardholder.get_card_by_name">
+<span class="sig-name descname"><span class="pre">get_card_by_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cardhub.models.UserCard" title="cardhub.models.UserCard"><span class="pre">UserCard</span></a></span></span><a class="reference internal" href="_modules/cardhub/models.html#Cardholder.get_card_by_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.Cardholder.get_card_by_name" title="Link to this definition">¶</a></dt>
+<dd><p>IN: str
+OUT: UserCard
+Def: Permite obtener una tarjeta del tarjetero por su nombre.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.Cardholder.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#cardhub.models.Cardholder.id" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.Cardholder.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cardhub.models.Cardholder.objects" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.Cardholder.remove_card">
+<span class="sig-name descname"><span class="pre">remove_card</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">card</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cardhub.models.UserCard" title="cardhub.models.UserCard"><span class="pre">UserCard</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/models.html#Cardholder.remove_card"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.Cardholder.remove_card" title="Link to this definition">¶</a></dt>
+<dd><p>IN: UserCard
+OUT: None
+Def: Permite eliminar una tarjeta del tarjetero.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.Cardholder.user">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#cardhub.models.Cardholder.user" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the reverse side of a one-to-one
+relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Restaurant</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">place</span> <span class="o">=</span> <span class="n">OneToOneField</span><span class="p">(</span><span class="n">Place</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;restaurant&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Place.restaurant</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseOneToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cardhub.models.CardholderUserCard">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cardhub.models.</span></span><span class="sig-name descname"><span class="pre">CardholderUserCard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/models.html#CardholderUserCard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.CardholderUserCard" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Esta clase no representa un ADT en términos de negocio.
+Esta clase se utiliza para definir la tabla intermedia
+entre Cardholder y UserCard, para poder migrar la relación a la base de datos</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="cardhub.models.CardholderUserCard.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#cardhub.models.CardholderUserCard.DoesNotExist" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cardhub.models.CardholderUserCard.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#cardhub.models.CardholderUserCard.MultipleObjectsReturned" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.CardholderUserCard.cardholder">
+<span class="sig-name descname"><span class="pre">cardholder</span></span><a class="headerlink" href="#cardhub.models.CardholderUserCard.cardholder" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.CardholderUserCard.cardholder_id">
+<span class="sig-name descname"><span class="pre">cardholder_id</span></span><a class="headerlink" href="#cardhub.models.CardholderUserCard.cardholder_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.CardholderUserCard.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#cardhub.models.CardholderUserCard.id" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.CardholderUserCard.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cardhub.models.CardholderUserCard.objects" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.CardholderUserCard.user_card">
+<span class="sig-name descname"><span class="pre">user_card</span></span><a class="headerlink" href="#cardhub.models.CardholderUserCard.user_card" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.CardholderUserCard.user_card_id">
+<span class="sig-name descname"><span class="pre">user_card_id</span></span><a class="headerlink" href="#cardhub.models.CardholderUserCard.user_card_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cardhub.models.StatementHistory">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cardhub.models.</span></span><span class="sig-name descname"><span class="pre">StatementHistory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/models.html#StatementHistory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.StatementHistory" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>ADT: Historial de Statements de una tarjeta 
+Def: Conjunto de Statements que se han generado para una User Card. 
+Permite agregar y obtener Statements mas no borrarlos ni editarlos. 
+Esto se debe a que un Statement es una “fotografía” 
+de una tarjeta al término de un mes, 
+permitir la eliminación de uno de estos sería permitir “borrar los hechos” 
+y su edición sería permitir “cambiar la realidad”.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="cardhub.models.StatementHistory.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#cardhub.models.StatementHistory.DoesNotExist" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cardhub.models.StatementHistory.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#cardhub.models.StatementHistory.MultipleObjectsReturned" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.StatementHistory.add_statement">
+<span class="sig-name descname"><span class="pre">add_statement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">statement</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#cardhub.models.CardStatement" title="cardhub.models.CardStatement"><span class="pre">CardStatement</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/models.html#StatementHistory.add_statement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.StatementHistory.add_statement" title="Link to this definition">¶</a></dt>
+<dd><p>IN: CardStatement
+OUT: None
+Def: Permite agregar un estado de tarjeta al historial.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.StatementHistory.get_all_statements">
+<span class="sig-name descname"><span class="pre">get_all_statements</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#cardhub.models.CardStatement" title="cardhub.models.CardStatement"><span class="pre">CardStatement</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/cardhub/models.html#StatementHistory.get_all_statements"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.StatementHistory.get_all_statements" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: list[CardStatement]
+Def: Permite obtener todos los estados de tarjeta del historial.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.StatementHistory.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#cardhub.models.StatementHistory.id" title="Link to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.StatementHistory.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cardhub.models.StatementHistory.objects" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.StatementHistory.usercard">
+<span class="sig-name descname"><span class="pre">usercard</span></span><a class="headerlink" href="#cardhub.models.StatementHistory.usercard" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the reverse side of a one-to-one
+relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Restaurant</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">place</span> <span class="o">=</span> <span class="n">OneToOneField</span><span class="p">(</span><span class="n">Place</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;restaurant&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Place.restaurant</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseOneToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cardhub.models.User">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cardhub.models.</span></span><span class="sig-name descname"><span class="pre">User</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/models.html#User"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.User" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>ADT: UsuarioUsuario de la aplicación
+Def: Esta entidad representa a los usuarios de 
+la aplicación que la utilizan para fines de dominio?</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="cardhub.models.User.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#cardhub.models.User.DoesNotExist" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cardhub.models.User.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#cardhub.models.User.MultipleObjectsReturned" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.User.get_cardholder">
+<span class="sig-name descname"><span class="pre">get_cardholder</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cardhub.models.Cardholder" title="cardhub.models.Cardholder"><span class="pre">Cardholder</span></a></span></span><a class="reference internal" href="_modules/cardhub/models.html#User.get_cardholder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.User.get_cardholder" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: Cardholder
+Def: Permite obtener el tarjetero del usuario.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.User.get_email">
+<span class="sig-name descname"><span class="pre">get_email</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#User.get_email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.User.get_email" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: str
+Def: Permite obtener el correo electrónico del usuario.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.User.get_name">
+<span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#User.get_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.User.get_name" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: str
+Def: Permite obtener el nombre del usuario.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.User.get_password">
+<span class="sig-name descname"><span class="pre">get_password</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#User.get_password"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.User.get_password" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: str
+Def: Permite obtener la contraseña del usuario.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.User.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cardhub.models.User.objects" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.User.set_name">
+<span class="sig-name descname"><span class="pre">set_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/models.html#User.set_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.User.set_name" title="Link to this definition">¶</a></dt>
+<dd><p>IN: str
+OUT: None
+Def: Permite establecer el nombre del usuario.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.User.set_password">
+<span class="sig-name descname"><span class="pre">set_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/models.html#User.set_password"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.User.set_password" title="Link to this definition">¶</a></dt>
+<dd><p>IN: str
+OUT: None
+Def: Permite establecer la contraseña del usuario.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.User.usercard_set">
+<span class="sig-name descname"><span class="pre">usercard_set</span></span><a class="headerlink" href="#cardhub.models.User.usercard_set" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cardhub.models.UserCard">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cardhub.models.</span></span><span class="sig-name descname"><span class="pre">UserCard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/models.html#UserCard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.UserCard" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>ADT: Tarjeta de usuario
+Def: Representa una tarjeta en posesión de un usuario de la aplicación. 
+Dado el contexto del problema 
+(la aplicación solo permite la gestión de tarjetas de crédito) 
+todas las tarjetas de usuario son, 
+necesariamente, una tarjeta de crédito. 
+El usuario puede poseer únicamente una copia de una misma tarjeta de banco 
+(e. g. Si el usuario posee una tarjeta de banco “BBVA Azúl”, 
+no puede agregar otra tarjeta de banco “BBVA Azúl” a su tarjetero).</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#cardhub.models.UserCard.DoesNotExist" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#cardhub.models.UserCard.MultipleObjectsReturned" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.add_expense">
+<span class="sig-name descname"><span class="pre">add_expense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expense</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/models.html#UserCard.add_expense"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.UserCard.add_expense" title="Link to this definition">¶</a></dt>
+<dd><p>IN: float
+OUT: None
+Def: Permite agregar un gasto a la tarjeta de usuario.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.cardholders">
+<span class="sig-name descname"><span class="pre">cardholders</span></span><a class="headerlink" href="#cardhub.models.UserCard.cardholders" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.cardholderusercard_set">
+<span class="sig-name descname"><span class="pre">cardholderusercard_set</span></span><a class="headerlink" href="#cardhub.models.UserCard.cardholderusercard_set" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.cardstatement_set">
+<span class="sig-name descname"><span class="pre">cardstatement_set</span></span><a class="headerlink" href="#cardhub.models.UserCard.cardstatement_set" title="Link to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.get_balance">
+<span class="sig-name descname"><span class="pre">get_balance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#UserCard.get_balance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.UserCard.get_balance" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: float
+Def: Permite obtener el saldo de la tarjeta de usuario.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.get_bank">
+<span class="sig-name descname"><span class="pre">get_bank</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#UserCard.get_bank"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.UserCard.get_bank" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: str
+Def: Permite obtener el nombre del banco al que pertenece la tarjeta de banco asociada a la tarjeta de usuario.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.get_bank_card">
+<span class="sig-name descname"><span class="pre">get_bank_card</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cardhub.models.BankCard" title="cardhub.models.BankCard"><span class="pre">BankCard</span></a></span></span><a class="reference internal" href="_modules/cardhub/models.html#UserCard.get_bank_card"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.UserCard.get_bank_card" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: BankCard
+Def: Permite obtener la tarjeta de banco asociada a la tarjeta de usuario.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.get_cut_off_date">
+<span class="sig-name descname"><span class="pre">get_cut_off_date</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#UserCard.get_cut_off_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.UserCard.get_cut_off_date" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: str
+Def: Permite obtener la fecha de corte de la tarjeta de usuario.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.get_id">
+<span class="sig-name descname"><span class="pre">get_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#UserCard.get_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.UserCard.get_id" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: int
+Def: Permite obtener el identificador único de la tarjeta de usuario.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.get_interest">
+<span class="sig-name descname"><span class="pre">get_interest</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#UserCard.get_interest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.UserCard.get_interest" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: float
+Def: Permite obtener el interés de la tarjeta de usuario.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.get_name">
+<span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#UserCard.get_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.UserCard.get_name" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: str
+Def: Permite obtener el nombre de la tarjeta de banco asociada a la tarjeta de usuario.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.get_next_by__cut_off_date">
+<span class="sig-name descname"><span class="pre">get_next_by__cut_off_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateField:</span> <span class="pre">_cut_off_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cardhub.models.UserCard.get_next_by__cut_off_date" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.get_next_by__payment_date">
+<span class="sig-name descname"><span class="pre">get_next_by__payment_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateField:</span> <span class="pre">_payment_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cardhub.models.UserCard.get_next_by__payment_date" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.get_owner">
+<span class="sig-name descname"><span class="pre">get_owner</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cardhub.models.User" title="cardhub.models.User"><span class="pre">User</span></a></span></span><a class="reference internal" href="_modules/cardhub/models.html#UserCard.get_owner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.UserCard.get_owner" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: User
+Def: Permite obtener el propietario de la tarjeta de usuario.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.get_owner_name">
+<span class="sig-name descname"><span class="pre">get_owner_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#UserCard.get_owner_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.UserCard.get_owner_name" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: str
+Def: Permite obtener el nombre del propietario de la tarjeta de usuario.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.get_payment_date">
+<span class="sig-name descname"><span class="pre">get_payment_date</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#UserCard.get_payment_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.UserCard.get_payment_date" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: str
+Def: Permite obtener la fecha de pago de la tarjeta de usuario.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.get_previous_by__cut_off_date">
+<span class="sig-name descname"><span class="pre">get_previous_by__cut_off_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateField:</span> <span class="pre">_cut_off_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cardhub.models.UserCard.get_previous_by__cut_off_date" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.get_previous_by__payment_date">
+<span class="sig-name descname"><span class="pre">get_previous_by__payment_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateField:</span> <span class="pre">_payment_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cardhub.models.UserCard.get_previous_by__payment_date" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.get_statement_history">
+<span class="sig-name descname"><span class="pre">get_statement_history</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cardhub.models.StatementHistory" title="cardhub.models.StatementHistory"><span class="pre">StatementHistory</span></a></span></span><a class="reference internal" href="_modules/cardhub/models.html#UserCard.get_statement_history"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.UserCard.get_statement_history" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: StatementHistory
+Def: Permite obtener el historial de estados de la tarjeta de usuario.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cardhub.models.UserCard.objects" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.pay">
+<span class="sig-name descname"><span class="pre">pay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/models.html#UserCard.pay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.UserCard.pay" title="Link to this definition">¶</a></dt>
+<dd><p>IN: float
+OUT: None
+Def: Permite realizar un pago en la tarjeta de usuario.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.set_cut_off_date">
+<span class="sig-name descname"><span class="pre">set_cut_off_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cut_off_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/models.html#UserCard.set_cut_off_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.UserCard.set_cut_off_date" title="Link to this definition">¶</a></dt>
+<dd><p>IN: str
+OUT: None
+Def: Permite establecer la fecha de corte de la tarjeta de usuario.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.set_payment_date">
+<span class="sig-name descname"><span class="pre">set_payment_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payment_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/models.html#UserCard.set_payment_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.UserCard.set_payment_date" title="Link to this definition">¶</a></dt>
+<dd><p>IN: str
+OUT: None
+Def: Permite establecer la fecha de pago de la tarjeta de usuario.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.models.UserCard.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/cardhub/models.html#UserCard.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.models.UserCard.to_dict" title="Link to this definition">¶</a></dt>
+<dd><p>IN: None
+OUT: dict
+Def: Permite obtener un diccionario con los atributos de la tarjeta de usuario.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cardhub.views_file">
+<span id="cardhub-views-file-module"></span><h2>cardhub.views_file module<a class="headerlink" href="#module-cardhub.views_file" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-cardhub">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cardhub" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">cardhub</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">cs-a-tarjetas</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">cardhub package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html">cardhub.tests package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cardhub.views.html">cardhub.views package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cardhub.admin">cardhub.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cardhub.apps">cardhub.apps module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cardhub.apps.CardhubConfig"><code class="docutils literal notranslate"><span class="pre">CardhubConfig</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.apps.CardhubConfig.default_auto_field"><code class="docutils literal notranslate"><span class="pre">CardhubConfig.default_auto_field</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.apps.CardhubConfig.name"><code class="docutils literal notranslate"><span class="pre">CardhubConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cardhub.forms">cardhub.forms module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cardhub.forms.LogInForm"><code class="docutils literal notranslate"><span class="pre">LogInForm</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.forms.LogInForm.base_fields"><code class="docutils literal notranslate"><span class="pre">LogInForm.base_fields</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.forms.LogInForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">LogInForm.declared_fields</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.forms.LogInForm.media"><code class="docutils literal notranslate"><span class="pre">LogInForm.media</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#cardhub.forms.UserForm"><code class="docutils literal notranslate"><span class="pre">UserForm</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.forms.UserForm.base_fields"><code class="docutils literal notranslate"><span class="pre">UserForm.base_fields</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.forms.UserForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">UserForm.declared_fields</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.forms.UserForm.media"><code class="docutils literal notranslate"><span class="pre">UserForm.media</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cardhub.models">cardhub.models module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cardhub.models.BankCard"><code class="docutils literal notranslate"><span class="pre">BankCard</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.BankCard.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">BankCard.DoesNotExist</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.BankCard.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">BankCard.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.BankCard.get_bank"><code class="docutils literal notranslate"><span class="pre">BankCard.get_bank()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.BankCard.get_id"><code class="docutils literal notranslate"><span class="pre">BankCard.get_id()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.BankCard.get_interest_rate"><code class="docutils literal notranslate"><span class="pre">BankCard.get_interest_rate()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.BankCard.get_name"><code class="docutils literal notranslate"><span class="pre">BankCard.get_name()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.BankCard.objects"><code class="docutils literal notranslate"><span class="pre">BankCard.objects</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.BankCard.usercard_set"><code class="docutils literal notranslate"><span class="pre">BankCard.usercard_set</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#cardhub.models.CardStatement"><code class="docutils literal notranslate"><span class="pre">CardStatement</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardStatement.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">CardStatement.DoesNotExist</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardStatement.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">CardStatement.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardStatement.get_card"><code class="docutils literal notranslate"><span class="pre">CardStatement.get_card()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardStatement.get_cut_off_date"><code class="docutils literal notranslate"><span class="pre">CardStatement.get_cut_off_date()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardStatement.get_date"><code class="docutils literal notranslate"><span class="pre">CardStatement.get_date()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardStatement.get_debt"><code class="docutils literal notranslate"><span class="pre">CardStatement.get_debt()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardStatement.get_interest"><code class="docutils literal notranslate"><span class="pre">CardStatement.get_interest()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardStatement.get_next_by__cut_off_date"><code class="docutils literal notranslate"><span class="pre">CardStatement.get_next_by__cut_off_date()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardStatement.get_next_by__date"><code class="docutils literal notranslate"><span class="pre">CardStatement.get_next_by__date()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardStatement.get_next_by__payment_date"><code class="docutils literal notranslate"><span class="pre">CardStatement.get_next_by__payment_date()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardStatement.get_owner_name"><code class="docutils literal notranslate"><span class="pre">CardStatement.get_owner_name()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardStatement.get_payment_date"><code class="docutils literal notranslate"><span class="pre">CardStatement.get_payment_date()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardStatement.get_previous_by__cut_off_date"><code class="docutils literal notranslate"><span class="pre">CardStatement.get_previous_by__cut_off_date()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardStatement.get_previous_by__date"><code class="docutils literal notranslate"><span class="pre">CardStatement.get_previous_by__date()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardStatement.get_previous_by__payment_date"><code class="docutils literal notranslate"><span class="pre">CardStatement.get_previous_by__payment_date()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardStatement.id"><code class="docutils literal notranslate"><span class="pre">CardStatement.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardStatement.objects"><code class="docutils literal notranslate"><span class="pre">CardStatement.objects</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardStatement.statement_histories"><code class="docutils literal notranslate"><span class="pre">CardStatement.statement_histories</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#cardhub.models.Cardholder"><code class="docutils literal notranslate"><span class="pre">Cardholder</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.Cardholder.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Cardholder.DoesNotExist</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.Cardholder.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Cardholder.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.Cardholder.add_card"><code class="docutils literal notranslate"><span class="pre">Cardholder.add_card()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.Cardholder.cardholderusercard_set"><code class="docutils literal notranslate"><span class="pre">Cardholder.cardholderusercard_set</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.Cardholder.get_all_cards"><code class="docutils literal notranslate"><span class="pre">Cardholder.get_all_cards()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.Cardholder.get_card_by_name"><code class="docutils literal notranslate"><span class="pre">Cardholder.get_card_by_name()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.Cardholder.id"><code class="docutils literal notranslate"><span class="pre">Cardholder.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.Cardholder.objects"><code class="docutils literal notranslate"><span class="pre">Cardholder.objects</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.Cardholder.remove_card"><code class="docutils literal notranslate"><span class="pre">Cardholder.remove_card()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.Cardholder.user"><code class="docutils literal notranslate"><span class="pre">Cardholder.user</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#cardhub.models.CardholderUserCard"><code class="docutils literal notranslate"><span class="pre">CardholderUserCard</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardholderUserCard.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">CardholderUserCard.DoesNotExist</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardholderUserCard.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">CardholderUserCard.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardholderUserCard.cardholder"><code class="docutils literal notranslate"><span class="pre">CardholderUserCard.cardholder</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardholderUserCard.cardholder_id"><code class="docutils literal notranslate"><span class="pre">CardholderUserCard.cardholder_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardholderUserCard.id"><code class="docutils literal notranslate"><span class="pre">CardholderUserCard.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardholderUserCard.objects"><code class="docutils literal notranslate"><span class="pre">CardholderUserCard.objects</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardholderUserCard.user_card"><code class="docutils literal notranslate"><span class="pre">CardholderUserCard.user_card</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.CardholderUserCard.user_card_id"><code class="docutils literal notranslate"><span class="pre">CardholderUserCard.user_card_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#cardhub.models.StatementHistory"><code class="docutils literal notranslate"><span class="pre">StatementHistory</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.StatementHistory.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">StatementHistory.DoesNotExist</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.StatementHistory.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">StatementHistory.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.StatementHistory.add_statement"><code class="docutils literal notranslate"><span class="pre">StatementHistory.add_statement()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.StatementHistory.get_all_statements"><code class="docutils literal notranslate"><span class="pre">StatementHistory.get_all_statements()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.StatementHistory.id"><code class="docutils literal notranslate"><span class="pre">StatementHistory.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.StatementHistory.objects"><code class="docutils literal notranslate"><span class="pre">StatementHistory.objects</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.StatementHistory.usercard"><code class="docutils literal notranslate"><span class="pre">StatementHistory.usercard</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#cardhub.models.User"><code class="docutils literal notranslate"><span class="pre">User</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.User.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">User.DoesNotExist</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.User.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">User.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.User.get_cardholder"><code class="docutils literal notranslate"><span class="pre">User.get_cardholder()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.User.get_email"><code class="docutils literal notranslate"><span class="pre">User.get_email()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.User.get_name"><code class="docutils literal notranslate"><span class="pre">User.get_name()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.User.get_password"><code class="docutils literal notranslate"><span class="pre">User.get_password()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.User.objects"><code class="docutils literal notranslate"><span class="pre">User.objects</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.User.set_name"><code class="docutils literal notranslate"><span class="pre">User.set_name()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.User.set_password"><code class="docutils literal notranslate"><span class="pre">User.set_password()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.User.usercard_set"><code class="docutils literal notranslate"><span class="pre">User.usercard_set</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#cardhub.models.UserCard"><code class="docutils literal notranslate"><span class="pre">UserCard</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">UserCard.DoesNotExist</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">UserCard.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.add_expense"><code class="docutils literal notranslate"><span class="pre">UserCard.add_expense()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.cardholders"><code class="docutils literal notranslate"><span class="pre">UserCard.cardholders</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.cardholderusercard_set"><code class="docutils literal notranslate"><span class="pre">UserCard.cardholderusercard_set</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.cardstatement_set"><code class="docutils literal notranslate"><span class="pre">UserCard.cardstatement_set</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.get_balance"><code class="docutils literal notranslate"><span class="pre">UserCard.get_balance()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.get_bank"><code class="docutils literal notranslate"><span class="pre">UserCard.get_bank()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.get_bank_card"><code class="docutils literal notranslate"><span class="pre">UserCard.get_bank_card()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.get_cut_off_date"><code class="docutils literal notranslate"><span class="pre">UserCard.get_cut_off_date()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.get_id"><code class="docutils literal notranslate"><span class="pre">UserCard.get_id()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.get_interest"><code class="docutils literal notranslate"><span class="pre">UserCard.get_interest()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.get_name"><code class="docutils literal notranslate"><span class="pre">UserCard.get_name()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.get_next_by__cut_off_date"><code class="docutils literal notranslate"><span class="pre">UserCard.get_next_by__cut_off_date()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.get_next_by__payment_date"><code class="docutils literal notranslate"><span class="pre">UserCard.get_next_by__payment_date()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.get_owner"><code class="docutils literal notranslate"><span class="pre">UserCard.get_owner()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.get_owner_name"><code class="docutils literal notranslate"><span class="pre">UserCard.get_owner_name()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.get_payment_date"><code class="docutils literal notranslate"><span class="pre">UserCard.get_payment_date()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.get_previous_by__cut_off_date"><code class="docutils literal notranslate"><span class="pre">UserCard.get_previous_by__cut_off_date()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.get_previous_by__payment_date"><code class="docutils literal notranslate"><span class="pre">UserCard.get_previous_by__payment_date()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.get_statement_history"><code class="docutils literal notranslate"><span class="pre">UserCard.get_statement_history()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.objects"><code class="docutils literal notranslate"><span class="pre">UserCard.objects</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.pay"><code class="docutils literal notranslate"><span class="pre">UserCard.pay()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.set_cut_off_date"><code class="docutils literal notranslate"><span class="pre">UserCard.set_cut_off_date()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.set_payment_date"><code class="docutils literal notranslate"><span class="pre">UserCard.set_payment_date()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cardhub.models.UserCard.to_dict"><code class="docutils literal notranslate"><span class="pre">UserCard.to_dict()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cardhub.views_file">cardhub.views_file module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cardhub">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="djangocrud.html">djangocrud package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage.html">manage module</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">cs-a-tarjetas</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">cs-a-tarjetas</a></li>
+      <li>Next: <a href="cardhub.tests.html" title="next chapter">cardhub.tests package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Mauricio May, Luis Medina, Daniel Rosado.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/cardhub.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cardhub.views package &#8212; cardhub 1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=29a6c3e3"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="djangocrud package" href="djangocrud.html" />
+    <link rel="prev" title="cardhub.tests package" href="cardhub.tests.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cardhub-views-package">
+<h1>cardhub.views package<a class="headerlink" href="#cardhub-views-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-cardhub.views.SignUp">
+<span id="cardhub-views-signup-module"></span><h2>cardhub.views.SignUp module<a class="headerlink" href="#module-cardhub.views.SignUp" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cardhub.views.SignUp.Signup">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cardhub.views.SignUp.</span></span><span class="sig-name descname"><span class="pre">Signup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/SignUp.html#Signup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.SignUp.Signup" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></p>
+<p>View for handling user signup.</p>
+<p>This class-based view handles GET and POST requests for the signup page.
+It renders the signup form and processes user registration.</p>
+<section id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>get(request)</dt><dd><p>Handles GET requests to render the signup page.</p>
+</dd>
+<dt>post(request)</dt><dd><p>Handles POST requests to register the user.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.views.SignUp.Signup.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/SignUp.html#Signup.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.SignUp.Signup.get" title="Link to this definition">¶</a></dt>
+<dd><p>Handles GET requests to render the signup page.</p>
+<section id="parameters">
+<h4>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>request<span class="classifier">HttpRequest</span></dt><dd><p>The request object containing the GET request data.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h4>Returns<a class="headerlink" href="#returns" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>HttpResponse</dt><dd><p>The rendered signup view with an empty signup form.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.views.SignUp.Signup.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/SignUp.html#Signup.post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.SignUp.Signup.post" title="Link to this definition">¶</a></dt>
+<dd><p>Handles POST requests to register the user.</p>
+<section id="id1">
+<h4>Parameters<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>request<span class="classifier">HttpRequest</span></dt><dd><p>The request object containing the POST request data.</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h4>Returns<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>HttpResponseRedirect</dt><dd><p>A redirect response to the login page if registration is successful,
+or back to the signup page if registration fails.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="module-cardhub.views.add_card">
+<span id="cardhub-views-add-card-module"></span><h2>cardhub.views.add_card module<a class="headerlink" href="#module-cardhub.views.add_card" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cardhub.views.add_card.AddCardView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cardhub.views.add_card.</span></span><span class="sig-name descname"><span class="pre">AddCardView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/add_card.html#AddCardView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.add_card.AddCardView" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></p>
+<p>View for handling the addition of a new bank card to a user’s account.</p>
+<p>This class-based view handles GET and POST requests for the addition of a new
+bank card. The view renders a page displaying available bank cards for the
+user to select and handles the submission of the selected card, associating
+it with the user and initializing necessary details.</p>
+<section id="public-methods">
+<h3>Public Methods<a class="headerlink" href="#public-methods" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>get(request)</dt><dd><p>Handles GET requests to display available bank cards for selection.</p>
+</dd>
+<dt>post(request)</dt><dd><p>Handles POST requests to process the selection and add the card to the
+user’s account.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.views.add_card.AddCardView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/add_card.html#AddCardView.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.add_card.AddCardView.get" title="Link to this definition">¶</a></dt>
+<dd><p>Handles GET requests and renders the add card view with available bank cards.</p>
+<section id="id3">
+<h4>Parameters<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>request<span class="classifier">HttpRequest</span></dt><dd><p>The request object used to generate this response.</p>
+</dd>
+</dl>
+</section>
+<section id="id4">
+<h4>Returns<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>HttpResponse</dt><dd><p>The rendered add card view with available bank cards.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.views.add_card.AddCardView.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/add_card.html#AddCardView.post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.add_card.AddCardView.post" title="Link to this definition">¶</a></dt>
+<dd><p>Handles POST requests to add a selected bank card to the user’s account.</p>
+<section id="id5">
+<h4>Parameters<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>request<span class="classifier">HttpRequest</span></dt><dd><p>The request object containing the form submission data.</p>
+</dd>
+</dl>
+</section>
+<section id="id6">
+<h4>Returns<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>HttpResponseRedirect</dt><dd><p>A redirect response to the home page after successfully adding the card.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="module-cardhub.views.card_details">
+<span id="cardhub-views-card-details-module"></span><h2>cardhub.views.card_details module<a class="headerlink" href="#module-cardhub.views.card_details" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cardhub.views.card_details.CardDetails">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cardhub.views.card_details.</span></span><span class="sig-name descname"><span class="pre">CardDetails</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/card_details.html#CardDetails"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.card_details.CardDetails" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></p>
+<p>View for displaying and managing details of a user’s bank card.</p>
+<p>This class-based view handles GET and POST requests to display detailed
+information about a user’s bank card, including statement history, and
+provides options to edit card information or cancel and return to the home
+page.</p>
+<section id="id7">
+<h3>Public Methods<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>get(request)</dt><dd><p>Handles GET requests to display the latest details of the user’s bank card.</p>
+</dd>
+<dt>post(request)</dt><dd><p>Handles POST requests to process actions such as cancel, edit info, or display details.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.views.card_details.CardDetails.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/card_details.html#CardDetails.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.card_details.CardDetails.get" title="Link to this definition">¶</a></dt>
+<dd><p>Handles GET requests to display the updated values of the user’s bank card.</p>
+<section id="id8">
+<h4>Parameters<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>request<span class="classifier">HttpRequest</span></dt><dd><p>The request object used to generate this response.</p>
+</dd>
+</dl>
+</section>
+<section id="id9">
+<h4>Returns<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>HttpResponse</dt><dd><p>The rendered card details view with the user’s card and statement history.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.views.card_details.CardDetails.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/card_details.html#CardDetails.post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.card_details.CardDetails.post" title="Link to this definition">¶</a></dt>
+<dd><p>Handles POST requests to manage card details, including cancel, edit info, or display details.</p>
+<section id="id10">
+<h4>Parameters<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>request<span class="classifier">HttpRequest</span></dt><dd><p>The request object containing the form submission data.</p>
+</dd>
+</dl>
+</section>
+<section id="id11">
+<h4>Returns<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>HttpResponseRedirect or HttpResponse</dt><dd><p>A redirect response to home or edit card page, or the rendered card details view.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="module-cardhub.views.confirm_card_addition">
+<span id="cardhub-views-confirm-card-addition-module"></span><h2>cardhub.views.confirm_card_addition module<a class="headerlink" href="#module-cardhub.views.confirm_card_addition" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cardhub.views.confirm_card_addition.ConfirmCardAddition">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cardhub.views.confirm_card_addition.</span></span><span class="sig-name descname"><span class="pre">ConfirmCardAddition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/confirm_card_addition.html#ConfirmCardAddition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.confirm_card_addition.ConfirmCardAddition" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></p>
+<p>View for confirming the addition of a bank card.</p>
+<p>This class-based view handles POST requests to confirm the addition of a bank card
+by displaying a confirmation page with the selected card’s details.</p>
+<section id="id12">
+<h3>Methods<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>post(request)</dt><dd><p>Handles POST requests to display the confirmation page for adding a bank card.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.views.confirm_card_addition.ConfirmCardAddition.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/confirm_card_addition.html#ConfirmCardAddition.post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.confirm_card_addition.ConfirmCardAddition.post" title="Link to this definition">¶</a></dt>
+<dd><p>Handles POST requests to display the confirmation page for adding a bank card.</p>
+<section id="id13">
+<h4>Parameters<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>request<span class="classifier">HttpRequest</span></dt><dd><p>The request object containing the form submission data.</p>
+</dd>
+</dl>
+</section>
+<section id="id14">
+<h4>Returns<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>HttpResponse</dt><dd><p>The rendered confirmation view with the selected bank card details.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="module-cardhub.views.confirm_card_deletion">
+<span id="cardhub-views-confirm-card-deletion-module"></span><h2>cardhub.views.confirm_card_deletion module<a class="headerlink" href="#module-cardhub.views.confirm_card_deletion" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cardhub.views.confirm_card_deletion.ConfirmCardDeletion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cardhub.views.confirm_card_deletion.</span></span><span class="sig-name descname"><span class="pre">ConfirmCardDeletion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/confirm_card_deletion.html#ConfirmCardDeletion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.confirm_card_deletion.ConfirmCardDeletion" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></p>
+<p>View for confirming the deletion of a user’s card.</p>
+<p>This class-based view handles POST requests to confirm the deletion of a user’s card
+by displaying a confirmation page with the selected card’s details.</p>
+<section id="id15">
+<h3>Methods<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>post(request)</dt><dd><p>Handles POST requests to display the confirmation page for deleting a user’s card.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.views.confirm_card_deletion.ConfirmCardDeletion.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/confirm_card_deletion.html#ConfirmCardDeletion.post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.confirm_card_deletion.ConfirmCardDeletion.post" title="Link to this definition">¶</a></dt>
+<dd><p>Handles POST requests to display the confirmation page for deleting a user’s card.</p>
+<section id="id16">
+<h4>Parameters<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>request<span class="classifier">HttpRequest</span></dt><dd><p>The request object containing the form submission data.</p>
+</dd>
+</dl>
+</section>
+<section id="id17">
+<h4>Returns<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>HttpResponse</dt><dd><p>The rendered confirmation view with the selected user’s card details.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="module-cardhub.views.delete_card">
+<span id="cardhub-views-delete-card-module"></span><h2>cardhub.views.delete_card module<a class="headerlink" href="#module-cardhub.views.delete_card" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cardhub.views.delete_card.DeleteCard">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cardhub.views.delete_card.</span></span><span class="sig-name descname"><span class="pre">DeleteCard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/delete_card.html#DeleteCard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.delete_card.DeleteCard" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></p>
+<p>View for handling the deletion of a user’s card.</p>
+<p>This class-based view handles POST requests to delete a user’s card by removing it
+from the cardholder’s list and deleting it from the database, then redirects to the home page.</p>
+<section id="id18">
+<h3>Methods<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>post(request)</dt><dd><p>Handles POST requests to delete the user’s card and redirect to the home page.</p>
+</dd>
+<dt>_remove_card_from_user_cardholder(request)</dt><dd><p>Helper method to remove the card from the user’s cardholder.</p>
+</dd>
+<dt>_delete_card_from_db(request)</dt><dd><p>Helper method to delete the card from the database.</p>
+</dd>
+<dt>_get_card_to_remove(request)</dt><dd><p>Helper method to retrieve the UserCard object based on the provided card ID.</p>
+</dd>
+<dt>_go_to_home_page()</dt><dd><p>Helper method to redirect the user to the home page.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.views.delete_card.DeleteCard.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/delete_card.html#DeleteCard.post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.delete_card.DeleteCard.post" title="Link to this definition">¶</a></dt>
+<dd><p>Handles POST requests to delete the user’s card and redirect to the home page.</p>
+<section id="id19">
+<h4>Parameters<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>request<span class="classifier">HttpRequest</span></dt><dd><p>The request object containing the form submission data.</p>
+</dd>
+</dl>
+</section>
+<section id="id20">
+<h4>Returns<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>HttpResponseRedirect</dt><dd><p>A redirect response to the home page after the card is deleted.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="module-cardhub.views.edit_card">
+<span id="cardhub-views-edit-card-module"></span><h2>cardhub.views.edit_card module<a class="headerlink" href="#module-cardhub.views.edit_card" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cardhub.views.edit_card.EditCard">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cardhub.views.edit_card.</span></span><span class="sig-name descname"><span class="pre">EditCard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/edit_card.html#EditCard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.edit_card.EditCard" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></p>
+<p>View for handling the editing of a user’s card details.</p>
+<p>This class-based view handles POST requests to edit card details, add expenses, 
+add payments, and add statements. It also manages navigation to different pages 
+based on user actions.</p>
+<section id="id21">
+<h3>Methods<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>post(request)</dt><dd><p>Handles POST requests to manage different user actions such as cancel, save changes,
+add expenses, add payments, and add statements.</p>
+</dd>
+<dt>date_to_str(input_date)</dt><dd><p>Converts a date object to a string formatted as ‘YYYY-MM-DD’.</p>
+</dd>
+<dt>str_to_date(str_date)</dt><dd><p>Converts a string formatted as ‘YYYY-MM-DD’ to a date object.</p>
+</dd>
+<dt>edit(request, new_cut_off_date, new_payment_date)</dt><dd><p>Helper method to edit and save the new cut-off and payment dates for the user’s card.</p>
+</dd>
+<dt>_send_error_message(request, error_message)</dt><dd><p>Helper method to send an error message to the user.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.views.edit_card.EditCard.date_to_str">
+<span class="sig-name descname"><span class="pre">date_to_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_date</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/edit_card.html#EditCard.date_to_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.edit_card.EditCard.date_to_str" title="Link to this definition">¶</a></dt>
+<dd><p>Converts a date object to a string formatted as ‘YYYY-MM-DD’.</p>
+<section id="id22">
+<h4>Parameters<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>input_date<span class="classifier">date</span></dt><dd><p>The date object to be converted.</p>
+</dd>
+</dl>
+</section>
+<section id="id23">
+<h4>Returns<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>str</dt><dd><p>The formatted date string.</p>
+</dd>
+</dl>
+</section>
+<section id="raises">
+<h4>Raises<a class="headerlink" href="#raises" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>ValueError</dt><dd><p>If the input date is empty or not a date object.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.views.edit_card.EditCard.edit">
+<span class="sig-name descname"><span class="pre">edit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_cut_off_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_payment_date</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/edit_card.html#EditCard.edit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.edit_card.EditCard.edit" title="Link to this definition">¶</a></dt>
+<dd><p>Edits and saves the new cut-off and payment dates for the user’s card.</p>
+<section id="id24">
+<h4>Parameters<a class="headerlink" href="#id24" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>request<span class="classifier">HttpRequest</span></dt><dd><p>The request object containing the form submission data.</p>
+</dd>
+<dt>new_cut_off_date<span class="classifier">str</span></dt><dd><p>The new cut-off date in string format.</p>
+</dd>
+<dt>new_payment_date<span class="classifier">str</span></dt><dd><p>The new payment date in string format.</p>
+</dd>
+</dl>
+</section>
+<section id="id25">
+<h4>Returns<a class="headerlink" href="#id25" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>bool</dt><dd><p>True if the changes are saved successfully, False otherwise.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.views.edit_card.EditCard.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/edit_card.html#EditCard.post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.edit_card.EditCard.post" title="Link to this definition">¶</a></dt>
+<dd><p>Handles POST requests to manage different user actions such as cancel, save changes,
+add expenses, add payments, and add statements.</p>
+<section id="id26">
+<h4>Parameters<a class="headerlink" href="#id26" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>request<span class="classifier">HttpRequest</span></dt><dd><p>The request object containing the form submission data.</p>
+</dd>
+</dl>
+</section>
+<section id="id27">
+<h4>Returns<a class="headerlink" href="#id27" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>HttpResponseRedirect or HttpResponse</dt><dd><p>A redirect response to the home or card details page, or the rendered edit card view.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.views.edit_card.EditCard.str_to_date">
+<span class="sig-name descname"><span class="pre">str_to_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str_date</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/edit_card.html#EditCard.str_to_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.edit_card.EditCard.str_to_date" title="Link to this definition">¶</a></dt>
+<dd><p>Converts a string formatted as ‘YYYY-MM-DD’ to a date object.</p>
+<section id="id28">
+<h4>Parameters<a class="headerlink" href="#id28" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>str_date<span class="classifier">str</span></dt><dd><p>The date string to be converted.</p>
+</dd>
+</dl>
+</section>
+<section id="id29">
+<h4>Returns<a class="headerlink" href="#id29" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>date</dt><dd><p>The converted date object.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="module-cardhub.views.home">
+<span id="cardhub-views-home-module"></span><h2>cardhub.views.home module<a class="headerlink" href="#module-cardhub.views.home" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cardhub.views.home.HomeView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cardhub.views.home.</span></span><span class="sig-name descname"><span class="pre">HomeView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/home.html#HomeView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.home.HomeView" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></p>
+<p>View for rendering the home page of the cardholder.</p>
+<p>This class-based view handles GET and POST requests to display the home page,
+which includes the cardholder’s username and all their associated cards.</p>
+<section id="id30">
+<h3>Methods<a class="headerlink" href="#id30" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>get(request)</dt><dd><p>Handles GET requests to render the home page.</p>
+</dd>
+<dt>post(request)</dt><dd><p>Handles POST requests to render the home page.</p>
+</dd>
+<dt>_build_home_view(request)</dt><dd><p>Helper method to construct the context and render the home view.</p>
+</dd>
+<dt>_query_user_name(request)</dt><dd><p>Helper method to retrieve the username of the current user.</p>
+</dd>
+<dt>_query_user(request)</dt><dd><p>Helper method to retrieve the User object based on the session email.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.views.home.HomeView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/home.html#HomeView.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.home.HomeView.get" title="Link to this definition">¶</a></dt>
+<dd><p>Handles GET requests to render the home page.</p>
+<section id="id31">
+<h4>Parameters<a class="headerlink" href="#id31" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>request<span class="classifier">HttpRequest</span></dt><dd><p>The request object containing the GET request data.</p>
+</dd>
+</dl>
+</section>
+<section id="id32">
+<h4>Returns<a class="headerlink" href="#id32" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>HttpResponse</dt><dd><p>The rendered home view with the username and cards.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.views.home.HomeView.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/home.html#HomeView.post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.home.HomeView.post" title="Link to this definition">¶</a></dt>
+<dd><p>Handles POST requests to render the home page.</p>
+<section id="id33">
+<h4>Parameters<a class="headerlink" href="#id33" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>request<span class="classifier">HttpRequest</span></dt><dd><p>The request object containing the POST request data.</p>
+</dd>
+</dl>
+</section>
+<section id="id34">
+<h4>Returns<a class="headerlink" href="#id34" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>HttpResponse</dt><dd><p>The rendered home view with the username and cards.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="module-cardhub.views.login">
+<span id="cardhub-views-login-module"></span><h2>cardhub.views.login module<a class="headerlink" href="#module-cardhub.views.login" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cardhub.views.login.Login">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cardhub.views.login.</span></span><span class="sig-name descname"><span class="pre">Login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/login.html#Login"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.login.Login" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></p>
+<p>View for handling user login.</p>
+<p>This class-based view handles GET and POST requests for the login page.
+It renders the login form and processes user authentication.</p>
+<section id="id35">
+<h3>Methods<a class="headerlink" href="#id35" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>get(request)</dt><dd><p>Handles GET requests to render the login page.</p>
+</dd>
+<dt>post(request)</dt><dd><p>Handles POST requests to authenticate the user.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.views.login.Login.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/login.html#Login.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.login.Login.get" title="Link to this definition">¶</a></dt>
+<dd><p>Handles GET requests to render the login page.</p>
+<section id="id36">
+<h4>Parameters<a class="headerlink" href="#id36" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>request<span class="classifier">HttpRequest</span></dt><dd><p>The request object containing the GET request data.</p>
+</dd>
+</dl>
+</section>
+<section id="id37">
+<h4>Returns<a class="headerlink" href="#id37" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>HttpResponse</dt><dd><p>The rendered login view with an empty login form.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.views.login.Login.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/login.html#Login.post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.login.Login.post" title="Link to this definition">¶</a></dt>
+<dd><p>Handles POST requests to authenticate the user.</p>
+<section id="id38">
+<h4>Parameters<a class="headerlink" href="#id38" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>request<span class="classifier">HttpRequest</span></dt><dd><p>The request object containing the POST request data.</p>
+</dd>
+</dl>
+</section>
+<section id="id39">
+<h4>Returns<a class="headerlink" href="#id39" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>HttpResponseRedirect</dt><dd><p>A redirect response to the appropriate page based on the login result.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="module-cardhub.views.welcome">
+<span id="cardhub-views-welcome-module"></span><h2>cardhub.views.welcome module<a class="headerlink" href="#module-cardhub.views.welcome" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cardhub.views.welcome.Welcome">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cardhub.views.welcome.</span></span><span class="sig-name descname"><span class="pre">Welcome</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/welcome.html#Welcome"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.welcome.Welcome" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></p>
+<p>View for rendering the welcome page.</p>
+<p>This class-based view handles GET requests to render the welcome page,
+which provides options for logging in or signing up. It also handles
+POST requests to redirect the user based on their chosen action.</p>
+<section id="id40">
+<h3>Methods<a class="headerlink" href="#id40" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>get(request)</dt><dd><p>Handles GET requests to render the welcome page.</p>
+</dd>
+<dt>post(request)</dt><dd><p>Handles POST requests to redirect the user based on their chosen action.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.views.welcome.Welcome.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/welcome.html#Welcome.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.welcome.Welcome.get" title="Link to this definition">¶</a></dt>
+<dd><p>Handles GET requests to render the welcome page.</p>
+<section id="id41">
+<h4>Parameters<a class="headerlink" href="#id41" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>request<span class="classifier">HttpRequest</span></dt><dd><p>The request object containing the GET request data.</p>
+</dd>
+</dl>
+</section>
+<section id="id42">
+<h4>Returns<a class="headerlink" href="#id42" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>HttpResponse</dt><dd><p>The rendered welcome view.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cardhub.views.welcome.Welcome.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cardhub/views/welcome.html#Welcome.post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cardhub.views.welcome.Welcome.post" title="Link to this definition">¶</a></dt>
+<dd><p>Handles POST requests to redirect the user based on their chosen action.</p>
+<section id="id43">
+<h4>Parameters<a class="headerlink" href="#id43" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>request<span class="classifier">HttpRequest</span></dt><dd><p>The request object containing the POST request data.</p>
+</dd>
+</dl>
+</section>
+<section id="id44">
+<h4>Returns<a class="headerlink" href="#id44" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>HttpResponseRedirect</dt><dd><p>A redirect response to the login or signup page.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="module-cardhub.views">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cardhub.views" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">cardhub</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">cs-a-tarjetas</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cardhub.html">cardhub package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="cardhub.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="cardhub.tests.html">cardhub.tests package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">cardhub.views package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-cardhub.views.SignUp">cardhub.views.SignUp module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-cardhub.views.add_card">cardhub.views.add_card module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-cardhub.views.card_details">cardhub.views.card_details module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-cardhub.views.confirm_card_addition">cardhub.views.confirm_card_addition module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-cardhub.views.confirm_card_deletion">cardhub.views.confirm_card_deletion module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-cardhub.views.delete_card">cardhub.views.delete_card module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-cardhub.views.edit_card">cardhub.views.edit_card module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-cardhub.views.home">cardhub.views.home module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-cardhub.views.login">cardhub.views.login module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-cardhub.views.welcome">cardhub.views.welcome module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-cardhub.views">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.html#module-cardhub.admin">cardhub.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.html#module-cardhub.apps">cardhub.apps module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.html#module-cardhub.forms">cardhub.forms module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.html#module-cardhub.models">cardhub.models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.html#module-cardhub.views_file">cardhub.views_file module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cardhub.html#module-cardhub">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="djangocrud.html">djangocrud package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage.html">manage module</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">cs-a-tarjetas</a><ul>
+  <li><a href="cardhub.html">cardhub package</a><ul>
+      <li>Previous: <a href="cardhub.tests.html" title="previous chapter">cardhub.tests package</a></li>
+      <li>Next: <a href="djangocrud.html" title="next chapter">djangocrud package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Mauricio May, Luis Medina, Daniel Rosado.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/cardhub.views.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
