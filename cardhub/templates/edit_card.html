@@ -19,6 +19,26 @@
         {% csrf_token %}
         <input type="hidden" name="card_id" value="{{ user_card.get_id }}">
 
+        <label for="expenses">Add Expenses:</label>
+        <input type="number" step="0.01" id="expenses" name="expenses" required>
+        <button type="submit" class="btn btn-primary" name="add_expenses">Add expenses</button>
+    </form>
+
+    <br>
+
+    <form action="{% url 'edit_card' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="card_id" value="{{ user_card.get_id }}">
+
+        <label for="pay">Add Pay:</label>
+        <input type="number" step="0.01" id="pay" name="pay" required>
+        <button type="submit" class="btn btn-primary" name="add_pay">Add pay</button>
+    </form>
+
+    <form action="{% url 'edit_card' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="card_id" value="{{ user_card.get_id }}">
+
         <p><span style="color: red;">Current Cut Off Date: {{ user_card.get_cut_off_date }}</span></p>
         <label for="new_cut_off_date">New Cut Off Date:</label>
         <input type="date" id="new_cut_off_date" name="new_cut_off_date" value="{{ user_card.get_cut_off_date }}" required>

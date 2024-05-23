@@ -20,10 +20,37 @@ class EditCard(View):
             new_payment_date = request.POST.get('new_payment_date')
             self.edit(request, new_cut_off_date, new_payment_date)
             return self._go_to_card_details(request)
+        elif 'add_expenses' in request.POST:
+            expenses = abs(float(request.POST.get('expenses')))
+            self._add_expenses(request, expenses)
+            return self._go_to_card_details(request)
+        elif 'add_pay' in request.POST:
+            pay = abs(float(request.POST.get('pay')))
+            self._add_pay(request, pay)
+            return self._go_to_card_details(request)
         else:
             return self._build_response(request)
 
-
+    def _add_expenses(self, request, expenses):
+        try:
+            user_card = self._query_user_card(request)
+            user_card.add_expense(expenses)
+            user_card.save()
+            self._send_success_message(request)
+        except Exception as e:
+            error_message = f"Error adding expenses: {str(e)}"
+            self._send_error_message(request, error_message)
+        
+    def _add_pay(self, request, pay):
+        try:
+            user_card = self._query_user_card(request)
+            user_card.pay(pay)
+            user_card.save()
+            self._send_success_message(request)
+        except Exception as e:
+            error_message = f"Error adding pay: {str(e)}"
+            self._send_error_message(request, error_message)
+            
     def _build_response(self, request):
         user_card = self._query_user_card(request)
         user_card_view = render(request, 'edit_card.html', {'user_card': user_card})

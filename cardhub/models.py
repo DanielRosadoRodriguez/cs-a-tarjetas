@@ -211,7 +211,27 @@ class UserCard(models.Model):
             return True
         else:
             raise ValueError("Payment must be a float")
+    
+    def add_expense(self, expense: float):
+        # Validate parameter
+        if not expense: raise ValueError("Expense can't be empty")
+        
+        # Verify parameter
+        if not isinstance(expense, float): raise ValueError("Expense must be a float")
+        if not self._is_correct_expense(expense): raise ValueError("Incorrect expense")
 
+        # Apply expense
+        self._balance += expense
+
+    def _is_correct_expense(self, expense: float) -> bool:
+        # Validate parameter
+        if not expense: raise ValueError("Expense can't be empty")
+        
+        # Verify parameter type
+        if not isinstance(expense, float): raise ValueError("Expense must be a float")
+        
+        return True
+    
     def to_dict(self) -> dict:
         return {
             "id": self.get_id(),
