@@ -31,6 +31,7 @@ class UserCard(models.Model):
     _payment_date = models.DateField(null=False) #The format is YYYY-MM-DD
     _cut_off_date = models.DateField(null=False) #The format is YYYY-MM-DD
     _balance = models.FloatField(null=False)
+    #_statement_history = models.OneToOneField('StatementHistory', on_delete=models.CASCADE, null=True)
 
     def get_id(self) -> int:
         return self._id
