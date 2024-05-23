@@ -2,7 +2,6 @@ import re
 from django.db import models
 from cardhub.exceptions.CardNotFoundError import CardNotFoundError
 from cardhub.exceptions.WrongDateFormatException import WrongDateFormatException
-from datetime import date
 
 
 
@@ -71,7 +70,6 @@ class UserCard(models.Model):
 
         # Set the payment date
         self._payment_date = payment_date
-        self.save()
 
     def get_cut_off_date(self) -> str:
         return self._cut_off_date   
@@ -85,7 +83,6 @@ class UserCard(models.Model):
         
         # Set the cut off date
         self._cut_off_date = cut_off_date
-        self.save()
 
     def _is_valid_payment_date(self, payment_date: str) -> bool:
         """Buena práctica: Divide la validación en pasos claros.
@@ -362,8 +359,6 @@ class CardStatement(models.Model):
     _card = models.ForeignKey(UserCard, on_delete=models.CASCADE)
     _owner_name = models.CharField(max_length=100, null=False)
     _date = models.DateField(null=False)
-    _cut_off_date = models.DateField(default=date.today, null=False)
-    _payment_date = models.DateField(default=date.today, null=False)
     _debt = models.FloatField(null=False)
     _interest = models.FloatField(null=False)
 
@@ -376,12 +371,6 @@ class CardStatement(models.Model):
 
     def get_date(self) -> str:
         return self._date
-    
-    def get_cut_off_date(self) -> str:
-        return str(self._cut_off_date)
-    
-    def get_payment_date(self) -> str:
-        return str(self._payment_date)
 
     def get_debt(self) -> float:
         return self._debt
