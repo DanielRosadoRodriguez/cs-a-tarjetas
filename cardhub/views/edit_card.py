@@ -31,6 +31,7 @@ class EditCard(View):
             return self._go_to_card_details(request)
         elif 'add_statement' in request.POST:
             user_card = self._query_user_card(request)
+            print(user_card.to_dict())
             history = user_card.get_statement_history()
             owner_name = user_card.get_owner_name()
             date = datetime.now()
@@ -41,6 +42,8 @@ class EditCard(View):
                 _card=user_card,
                 _owner_name=owner_name,
                 _date=date,
+                _payment_date=user_card.get_payment_date(),
+                _cut_off_date=user_card.get_cut_off_date(),
                 _debt=debt,
                 _interest=interest
             )
@@ -60,7 +63,6 @@ class EditCard(View):
             user_card.save()
             
             return self._go_to_card_details(request)
-  
         else:
             return self._build_response(request)
 
